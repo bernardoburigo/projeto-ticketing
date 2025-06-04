@@ -17,9 +17,9 @@ const Sidebar = () => {
             <Calendar size={20} />
             Eventos
           </Link>
-          <Link to='/ingressos' className="flex items-center gap-3 hover:text-blue-400 cursor-pointer">
+          <Link to='/relatorios' className="flex items-center gap-3 hover:text-blue-400 cursor-pointer">
             <Ticket size={20} />
-            Ingressos
+            Relatórios
           </Link>
           <Link to='/promotores' className="flex items-center gap-3 hover:text-blue-400 cursor-pointer">
             <Users size={20} />

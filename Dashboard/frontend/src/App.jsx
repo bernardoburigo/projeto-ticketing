@@ -4,6 +4,7 @@ import Eventos from './pages/Eventos';
 import CriarEvento from './pages/CriarEvento';
 import EditarEvento from './pages/EditarEvento';
 import DetalhesEvento from './pages/DetalhesEvento';
+import Relatorios from './pages/Relatorios';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/eventos/novo" element={<CriarEvento />} />
         <Route path="/eventos/:id/editar" element={<EditarEvento />} />
         <Route path="/eventos/:id" element={<DetalhesEvento />} />
+        <Route path="/relatorios" element={<Relatorios />} />
       </Routes>
     </BrowserRouter>
   );
