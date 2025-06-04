@@ -19,37 +19,21 @@ const Relatorios = () => {
   const [publicoSelecionado, setPublicoSelecionado] = useState('Todos');
   const [checkinSelecionado, setCheckinSelecionado] = useState('Todos');
 
-  const filtrarDados = dadosRelatorio.filter(item => {
-    const eventoMatch = eventoSelecionado === 'Todos' || item.evento === eventoSelecionado;
-    const publicoMatch = publicoSelecionado === 'Todos' || item.publico === publicoSelecionado;
-    const checkinMatch =
+  const dadosFiltrados = dadosRelatorio.filter(item => {
+    const eventoOk = eventoSelecionado === 'Todos' || item.evento === eventoSelecionado;
+    const publicoOk = publicoSelecionado === 'Todos' || item.publico === publicoSelecionado;
+    const checkinOk =
       checkinSelecionado === 'Todos' ||
       (checkinSelecionado === 'Com Check-in' && item.checkin) ||
       (checkinSelecionado === 'Sem Check-in' && !item.checkin);
 
-    return eventoMatch && publicoMatch && checkinMatch;
+    return eventoOk && publicoOk && checkinOk;
   });
 
-  const exportarCSV = () => {
-    const linhas = [
-      ['Nome', 'Ingresso', 'Evento', 'Valor'],
-      ...dadosRelatorio.map(item => [item.nome, item.ingresso, item.evento, item.valor]),
-    ];
-    const csvContent =
-      'data:text/csv;charset=utf-8,' +
-      linhas.map(e => e.join(',')).join('\n');
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', 'relatorio.csv');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  const exportarPDF = () => {
-    alert('Funcionalidade de exportar para PDF será implementada futuramente.');
-    // Aqui você poderá usar uma lib como jspdf ou pdfmake para gerar o PDF.
+  const limparFiltros = () => {
+    setEventoSelecionado('Todos');
+    setPublicoSelecionado('Todos');
+    setCheckinSelecionado('Todos');
   };
 
   return (
@@ -58,93 +42,91 @@ const Relatorios = () => {
       <div className="flex-1 flex flex-col">
         <Topbar />
         <main className="p-6 bg-gray-100 min-h-screen">
-          <h1 className="text-2xl font-bold mb-6">Relatórios</h1>
+          <h1 className="text-2xl font-bold mb-4">Relatórios</h1>
 
-          {/* Filtros */}
-          <div className="bg-white p-6 rounded-xl shadow mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div>
-              <label className="block mb-2 font-medium">Evento</label>
+          <div className="bg-white p-6 rounded-xl shadow mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
               <select
-                className="w-full border rounded px-3 py-2"
                 value={eventoSelecionado}
                 onChange={e => setEventoSelecionado(e.target.value)}
+                className="border rounded p-2"
               >
-                <option>Todos</option>
-                {eventos.map(ev => (
-                  <option key={ev}>{ev}</option>
+                <option value="Todos">Todos os Eventos</option>
+                {eventos.map(e => (
+                  <option key={e} value={e}>
+                    {e}
+                  </option>
                 ))}
               </select>
-            </div>
 
-            <div>
-              <label className="block mb-2 font-medium">Público-Alvo</label>
               <select
-                className="w-full border rounded px-3 py-2"
                 value={publicoSelecionado}
                 onChange={e => setPublicoSelecionado(e.target.value)}
+                className="border rounded p-2"
               >
-                <option>Todos</option>
-                {publicos.map(pub => (
-                  <option key={pub}>{pub}</option>
+                <option value="Todos">Todos os Públicos</option>
+                {publicos.map(p => (
+                  <option key={p} value={p}>
+                    {p}
+                  </option>
                 ))}
               </select>
-            </div>
 
-            <div>
-              <label className="block mb-2 font-medium">Status Check-in</label>
               <select
-                className="w-full border rounded px-3 py-2"
                 value={checkinSelecionado}
                 onChange={e => setCheckinSelecionado(e.target.value)}
+                className="border rounded p-2"
               >
                 {statusCheckin.map(status => (
-                  <option key={status}>{status}</option>
+                  <option key={status} value={status}>
+                    {status}
+                  </option>
                 ))}
               </select>
+
+              <button
+                onClick={limparFiltros}
+                className="bg-red-500 text-white rounded p-2 hover:bg-red-600"
+              >
+                Limpar Filtros
+              </button>
             </div>
-          </div>
 
-          {/* Tabela */}
-          <div className="bg-white p-6 rounded-xl shadow mb-6">
-            <h2 className="text-lg font-semibold mb-4">Dados Filtrados</h2>
-            <table className="w-full table-auto border-collapse">
-              <thead>
-                <tr className="bg-gray-200">
-                  <th className="border px-4 py-2 text-left">Nome</th>
-                  <th className="border px-4 py-2 text-left">Evento</th>
-                  <th className="border px-4 py-2 text-left">Público-Alvo</th>
-                  <th className="border px-4 py-2 text-left">Check-in</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtrarDados.map((item, index) => (
-                  <tr key={index}>
-                    <td className="border px-4 py-2">{item.nome}</td>
-                    <td className="border px-4 py-2">{item.evento}</td>
-                    <td className="border px-4 py-2">{item.publico}</td>
-                    <td className="border px-4 py-2">
-                      {item.checkin ? 'Sim' : 'Não'}
-                    </td>
+            {dadosFiltrados.length === 0 ? (
+              <p className="text-center text-gray-500">Nenhum resultado encontrado.</p>
+            ) : (
+              <table className="w-full border">
+                <thead>
+                  <tr className="bg-gray-200">
+                    <th className="border p-2">Nome</th>
+                    <th className="border p-2">Público</th>
+                    <th className="border p-2">Evento</th>
+                    <th className="border p-2">Check-in</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {dadosFiltrados.map((item, index) => (
+                    <tr key={index}>
+                      <td className="border p-2">{item.nome}</td>
+                      <td className="border p-2">{item.publico}</td>
+                      <td className="border p-2">{item.evento}</td>
+                      <td className="border p-2">
+                        {item.checkin ? 'Realizado' : 'Não realizado'}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
 
-          {/* Botões de Exportação */}
-          <div className="flex gap-4">
-            <button
-              onClick={exportarCSV}
-              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            >
-              <FaFileCsv /> Exportar CSV
-            </button>
-            <button
-              className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-              disabled
-            >
-              <FaFilePdf /> Exportar PDF
-            </button>
+            <div className="flex gap-5 mt-5">
+              <button className="bg-blue-500 text-white rounded p-2 flex items-center gap-2 hover:bg-blue-600">
+                <FaFileCsv /> Exportar CSV
+              </button>
+              <button className="bg-red-500 text-white rounded p-2 flex items-center gap-2 hover:bg-green-600">
+                <FaFilePdf /> Exportar PDF
+              </button>
+            </div>
           </div>
         </main>
       </div>

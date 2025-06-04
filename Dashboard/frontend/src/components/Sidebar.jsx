@@ -1,4 +1,4 @@
-import { Home, Calendar, Ticket, Users, LogOut } from 'lucide-react';
+import { Home, Calendar, Ticket, Users, LogOut, PieChart, BarChart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -18,7 +18,7 @@ const Sidebar = () => {
             Eventos
           </Link>
           <Link to='/relatorios' className="flex items-center gap-3 hover:text-blue-400 cursor-pointer">
-            <Ticket size={20} />
+            <BarChart size={20} />
             Relatórios
           </Link>
           <Link to='/promotores' className="flex items-center gap-3 hover:text-blue-400 cursor-pointer">
