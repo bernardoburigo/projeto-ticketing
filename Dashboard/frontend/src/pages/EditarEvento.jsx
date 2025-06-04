@@ -30,7 +30,7 @@ const EditarEvento = () => {
                 type="text"
                 className="w-full border rounded-xl p-2"
                 required
-                defaultValue="Nome Exemplo"
+                placeholder="Código Exemplo"
               />
             </div>
 
@@ -49,7 +49,7 @@ const EditarEvento = () => {
                 type="text"
                 className="w-full border rounded-xl p-2"
                 required
-                defaultValue="Local Exemplo"
+                placeholder="Local Exemplo"
               />
             </div>
 
@@ -59,7 +59,7 @@ const EditarEvento = () => {
                 type="number"
                 className="w-full border rounded-xl p-2"
                 required
-                defaultValue="100"
+                placeholder="Quantidade Exemplo"
               />
             </div>
 

@@ -29,6 +29,7 @@ const CriarEvento = () => {
                 type="text"
                 className="w-full border rounded-xl p-2"
                 required
+                placeholder="Nome Exemplo"
               />
             </div>
 
@@ -47,6 +48,7 @@ const CriarEvento = () => {
                 type="text"
                 className="w-full border rounded-xl p-2"
                 required
+                placeholder="Endereço Exemplo"
               />
             </div>
 
@@ -56,6 +58,7 @@ const CriarEvento = () => {
                 type="number"
                 className="w-full border rounded-xl p-2"
                 required
+                placeholder="Quantidade Exemplo"
               />
             </div>
 
