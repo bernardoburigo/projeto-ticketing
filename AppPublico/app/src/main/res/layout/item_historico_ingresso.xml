@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF"
+    android:layout_marginBottom="8dp"
+    android:elevation="2dp">
+
+    <TextView
+        android:id="@+id/textNomeEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome do Evento"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/textDataEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Data"
+        android:textColor="#666666"
+        android:paddingTop="4dp"/>
+
+    <TextView
+        android:id="@+id/textLocalEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Local"
+        android:textColor="#666666"
+        android:paddingTop="2dp"/>
+
+    <TextView
+        android:id="@+id/textHoraEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hora"
+        android:textColor="#666666"
+        android:paddingTop="2dp"/>
+
+    <TextView
+        android:id="@+id/textValorPago"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Valor Pago"
+        android:textColor="#666666"
+        android:paddingTop="2dp"/>
+</LinearLayout>
