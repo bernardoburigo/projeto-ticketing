@@ -1,4 +1,4 @@
 package com.example.AppPublico.activities;
 
-public class HistoricoActivity {
+public class PesquisaActivity {
 }
