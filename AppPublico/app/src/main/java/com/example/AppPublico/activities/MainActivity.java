@@ -23,22 +23,26 @@ public class MainActivity extends AppCompatActivity {
 
         if (!isLoggedIn) {
             bottomNavigation.setVisibility(BottomNavigationView.GONE);
-            // exibir botão de login futuro aqui
+            // futuramente: exibir botão de login
         } else {
             bottomNavigation.setVisibility(BottomNavigationView.VISIBLE);
         }
+
+        bottomNavigation.setSelectedItemId(R.id.nav_home); // manter selecionado
 
         bottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-                if (id == R.id.nav_home) return true; // já está na home
+                if (id == R.id.nav_home) return true;
                 if (id == R.id.nav_search) {
                     startActivity(new Intent(MainActivity.this, PesquisaActivity.class));
+                    overridePendingTransition(0, 0);
                     return true;
                 }
                 if (id == R.id.nav_user) {
                     startActivity(new Intent(MainActivity.this, UsuarioActivity.class));
+                    overridePendingTransition(0, 0);
                     return true;
                 }
                 return false;
