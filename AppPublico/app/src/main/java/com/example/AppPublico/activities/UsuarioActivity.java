@@ -13,7 +13,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class UsuarioActivity extends AppCompatActivity {
 
-    private boolean isLoggedIn = true; // lógica futura
+    private boolean isLoggedIn = true;
+    private BottomNavigationView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class UsuarioActivity extends AppCompatActivity {
             // lógica futura de login
         });
 
-        BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation = findViewById(R.id.bottom_navigation);
 
         if (!isLoggedIn) {
             bottomNavigation.setVisibility(BottomNavigationView.GONE);
@@ -39,25 +40,43 @@ public class UsuarioActivity extends AppCompatActivity {
             bottomNavigation.setVisibility(BottomNavigationView.VISIBLE);
         }
 
-        bottomNavigation.setSelectedItemId(R.id.nav_user);
-
         bottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
-                    startActivity(new Intent(UsuarioActivity.this, MainActivity.class));
-                    overridePendingTransition(0, 0);
+                    navigateTo(MainActivity.class);
                     return true;
                 }
                 if (id == R.id.nav_search) {
-                    startActivity(new Intent(UsuarioActivity.this, PesquisaActivity.class));
-                    overridePendingTransition(0, 0);
+                    navigateTo(PesquisaActivity.class);
                     return true;
                 }
                 if (id == R.id.nav_user) return true;
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isLoggedIn && bottomNavigation != null) {
+            bottomNavigation.setSelectedItemId(R.id.nav_user);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        navigateTo(MainActivity.class);
+    }
+
+    private void navigateTo(Class<?> targetActivity) {
+        Intent intent = new Intent(this, targetActivity);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+        finish();
     }
 }

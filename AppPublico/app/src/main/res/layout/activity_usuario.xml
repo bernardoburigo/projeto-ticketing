@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layoutUsuario"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvBoasVindas"
+    <LinearLayout
+        android:id="@+id/layoutUsuario"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Bem-vindo, usuário!"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white">
 
-    <Button
-        android:id="@+id/btnHistorico"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ver Meus Ingressos" />
+        <TextView
+            android:id="@+id/tvBoasVindas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bem-vindo, usuário!"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Fazer Login"
-        android:layout_marginTop="12dp" />
+        <Button
+            android:id="@+id/btnHistorico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver Meus Ingressos" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fazer Login"
+            android:layout_marginTop="12dp" />
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -37,4 +42,4 @@
         android:layout_gravity="bottom"
         android:background="@color/white"
         app:menu="@menu/bottom_navigation_menu" />
-</LinearLayout>
+</FrameLayout>
