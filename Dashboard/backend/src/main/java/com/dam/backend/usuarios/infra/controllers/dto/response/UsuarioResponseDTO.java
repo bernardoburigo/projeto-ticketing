@@ -1,15 +1,14 @@
 package com.dam.backend.usuarios.infra.controllers.dto.response;
 
-import com.dam.backend.entities.RoleEntity;
 import lombok.Builder;
 
 @Builder
-public record PaginarUsuarioResponseDTO(
+public record UsuarioResponseDTO(
         Integer id,
         String nome,
         String email,
-        RoleEntity role,
-        String ativo,
+        RoleResponseDTO role,
+        boolean ativo,
         String criadoEm,
         String modificadoEm) {
 }

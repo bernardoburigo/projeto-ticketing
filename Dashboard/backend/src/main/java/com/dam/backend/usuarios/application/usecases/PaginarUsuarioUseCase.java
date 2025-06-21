@@ -3,12 +3,14 @@ package com.dam.backend.usuarios.application.usecases;
 import com.dam.backend.entities.UsuarioEntity;
 import com.dam.backend.shared.utils.PaginationUtil;
 import com.dam.backend.shared.utils.dto.PaginarDTO;
-import com.dam.backend.usuarios.infra.controllers.dto.response.PaginarUsuarioResponseDTO;
+import com.dam.backend.usuarios.infra.controllers.dto.response.UsuarioResponseDTO;
 import com.dam.backend.usuarios.infra.mappers.UsuarioMapper;
 import com.dam.backend.usuarios.infra.repositories.UsuarioRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PaginarUsuarioUseCase {
 
     private final UsuarioRepository usuarioRepository;
@@ -17,7 +19,7 @@ public class PaginarUsuarioUseCase {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public Page<PaginarUsuarioResponseDTO> paginar(PaginarDTO dto) {
+    public Page<UsuarioResponseDTO> paginar(PaginarDTO dto) {
 
         PageRequest pageRequest = PaginationUtil.paginar(dto);
 
@@ -27,6 +29,6 @@ public class PaginarUsuarioUseCase {
             return PaginationUtil.paginaVazia(pageRequest);
         }
 
-        return usuarios.map(UsuarioMapper::toPaginarOrDetalhar);
+        return usuarios.map(UsuarioMapper::toPaginarOrBuscar);
     }
 }

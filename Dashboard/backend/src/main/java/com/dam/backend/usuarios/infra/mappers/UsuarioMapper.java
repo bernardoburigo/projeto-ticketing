@@ -1,11 +1,11 @@
 package com.dam.backend.usuarios.infra.mappers;
 
+import com.dam.backend.entities.RoleEntity;
 import com.dam.backend.entities.UsuarioEntity;
 import com.dam.backend.shared.exceptions.ClasseNaoInstanciavelException;
 import com.dam.backend.shared.utils.FormateDateUtil;
-import com.dam.backend.shared.utils.Util;
-import com.dam.backend.usuarios.infra.controllers.dto.response.PaginarUsuarioResponseDTO;
 import com.dam.backend.usuarios.infra.controllers.dto.response.UsuarioCadastradoResponseDTO;
+import com.dam.backend.usuarios.infra.controllers.dto.response.UsuarioResponseDTO;
 
 public final class UsuarioMapper {
 
@@ -22,13 +22,15 @@ public final class UsuarioMapper {
         );
     }
 
-    public static PaginarUsuarioResponseDTO toPaginarOrDetalhar(UsuarioEntity usuario) {
-        return PaginarUsuarioResponseDTO.builder()
+    public static UsuarioResponseDTO toPaginarOrBuscar(UsuarioEntity usuario) {
+        RoleEntity role = usuario.getRole() != null ? usuario.getRole() : null;
+
+        return UsuarioResponseDTO.builder()
                 .id(usuario.getId())
                 .nome(usuario.getNome())
                 .email(usuario.getEmail())
-                .role(usuario.getRole())
-                .ativo(Util.verifyStatusAtivo(usuario.isAtivo()))
+                .role(RoleMapper.toRoleDTO(role))
+                .ativo(usuario.isAtivo())
                 .criadoEm(FormateDateUtil.formatarDataZonedDateTime(usuario.getAudCriadoData()))
                 .modificadoEm(FormateDateUtil.formatarDataZonedDateTime(usuario.getAudModificadoData()))
                 .build();
