@@ -25,7 +25,7 @@ public class RoleEntity extends Auditoria {
     @Column(name = "i_role")
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String nome;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)

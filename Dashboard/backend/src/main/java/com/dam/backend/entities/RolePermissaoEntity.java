@@ -1,5 +1,6 @@
 package com.dam.backend.entities;
 
+import com.dam.backend.entities.utils.Auditoria;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -16,7 +17,7 @@ import lombok.Setter;
 @Table(name = "roles_permissoes")
 @Getter
 @Setter
-public class RolePermissaoEntity {
+public class RolePermissaoEntity extends Auditoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

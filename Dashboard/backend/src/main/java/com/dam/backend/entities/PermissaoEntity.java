@@ -21,5 +21,9 @@ public class PermissaoEntity extends Auditoria {
     @Column(name = "i_permissao")
     private Integer id;
 
+    @Column(unique = true, nullable = false)
     private String permissao;
+
+    @Column(nullable = false)
+    private String descricao;
 }

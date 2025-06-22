@@ -20,6 +20,7 @@ public class ExcluirUsuarioUseCase {
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuario não encontrado."));
 
         usuario.setExcluido(true);
+        usuario.setAtivo(false);
         usuarioRepository.save(usuario);
 
         return new MensagemSistema("Usuário excluido com sucesso!");
