@@ -4,10 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
+import java.time.ZonedDateTime;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.ZonedDateTime;
 
 @Getter
 @Setter

@@ -9,6 +9,7 @@ import com.dam.backend.usuarios.infra.controllers.exceptions.LoginIncorretoExcep
 import com.dam.backend.usuarios.infra.repositories.UsuarioRepository;
 import java.time.Instant;
 import java.time.ZonedDateTime;
+import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -52,9 +53,15 @@ public class LoginUseCase {
         int expiresIn = 28800;
         String expiresInToken = FormateDateUtil.formatarDataEHoraZonedDateTime(ZonedDateTime.now().plusSeconds(expiresIn));
 
+        List<String> permissoes = usuario.getRole().getPermissoes().stream()
+                .map(rp -> rp.getPermissao().getPermissao())
+                .toList();
+
         JwtClaimsSet claims = JwtClaimsSet.builder()
                 .issuer("dam")
                 .subject(usuario.getId().toString())
+                .claim("role", usuario.getRole().getNome())
+                .claim("permissoes", permissoes)
                 .issuedAt(now)
                 .expiresAt(now.plusSeconds(expiresIn))
                 .build();

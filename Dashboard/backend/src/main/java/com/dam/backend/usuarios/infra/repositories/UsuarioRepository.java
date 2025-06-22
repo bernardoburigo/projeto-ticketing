@@ -12,17 +12,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Integer> {
 
-    @Query("SELECT u FROM UsuarioEntity u WHERE u.email = :email " +
-            "AND u.ativo IS TRUE " +
-            "AND u.excluido IS FALSE")
     Optional<UsuarioEntity> findByEmail(String email);
 
-    @Query("SELECT COUNT(u) > 0 FROM UsuarioEntity u WHERE u.email = :email")
+    @Query("SELECT COUNT(u) > 0 FROM UsuarioEntity u WHERE u.email = :email " +
+            "AND u.ativo = TRUE " +
+            "AND u.excluido = FALSE")
     boolean existeEmail(String email);
 
     @Query("SELECT u FROM UsuarioEntity u " +
-            "WHERE u.nome ILIKE CONCAT('%', :search, '%') " +
-            "AND u.email ILIKE CONCAT('%', :search, '%')" +
+            "WHERE (u.nome ILIKE CONCAT('%', :search, '%') " +
+            "OR u.email ILIKE CONCAT('%', :search, '%')) " +
             "AND u.excluido IS FALSE")
     Page<UsuarioEntity> findAllByAtivo(@Param("search") String search ,PageRequest pageRequest);
 }

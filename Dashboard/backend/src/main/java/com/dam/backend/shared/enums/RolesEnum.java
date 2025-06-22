@@ -11,7 +11,8 @@ import java.util.stream.Stream;
 public enum RolesEnum {
 
     ROLE_ADMIN(1, "Admin"),
-    ROLE_USUARIO(2, "Usuário");
+    ROLE_USUARIO(2, "Usuário"),
+    ROLE_ORGANIZADOR(3, "Organizador");
 
     private final Integer id;
     private final String role;

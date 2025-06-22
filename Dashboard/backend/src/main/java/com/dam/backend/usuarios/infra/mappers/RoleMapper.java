@@ -14,7 +14,7 @@ public final class RoleMapper {
         return RoleResponseDTO.builder()
                 .id(role.getId())
                 .nome(role.getNome())
-                .rolePermissao(role.getPermissoes() != null ? role.getPermissoes() : null)
+                .rolePermissao(PermissaoMapper.toListDTO(role.getPermissoes()))
                 .build();
     }
 }

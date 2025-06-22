@@ -1,13 +1,13 @@
 package com.dam.backend.shared.exceptions;
 
-import com.dam.backend.shared.enums.HttpType;
+import org.springframework.http.HttpStatus;
 
 public class EntidadeNaoEncontradaException extends ModelException {
     public EntidadeNaoEncontradaException(String message) {
-        super(message, HttpType.ERRO);
+        super(message, HttpStatus.NOT_FOUND);
     }
 
-    public EntidadeNaoEncontradaException(String message, HttpType httpType) {
+    public EntidadeNaoEncontradaException(String message, HttpStatus httpType) {
         super(message, httpType);
     }
 }

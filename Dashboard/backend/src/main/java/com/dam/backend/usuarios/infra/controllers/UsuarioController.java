@@ -1,5 +1,7 @@
 package com.dam.backend.usuarios.infra.controllers;
 
+import com.dam.backend.config.WithPermissoes;
+import com.dam.backend.shared.Permissoes;
 import com.dam.backend.shared.utils.dto.MensagemSistema;
 import com.dam.backend.shared.utils.dto.PaginarDTO;
 import com.dam.backend.usuarios.application.usecases.AtivarOrInativarUseCase;
@@ -61,12 +63,14 @@ public class UsuarioController {
         return loginUseCase.login(dto);
     }
 
+    @WithPermissoes({Permissoes.ADMIN})
     @Transactional
     @PostMapping("/cadastrar")
     public ResponseEntity<UsuarioCadastradoResponseDTO> cadastrarUsuario(@RequestBody UsuarioRequestDTO dto) {
         return cadastrarUsuarioUseCase.cadastrar(dto);
     }
 
+    @WithPermissoes({Permissoes.ADMIN})
     @GetMapping
     public ResponseEntity<Page<UsuarioResponseDTO>> paginarUsuario(
             @RequestParam(required = false) Integer page,
@@ -79,6 +83,7 @@ public class UsuarioController {
         return ResponseEntity.ok(paginarUsuarioUseCase.paginar(dto));
     }
 
+    @WithPermissoes({Permissoes.ADMIN})
     @PutMapping("ativar/{id}")
     public ResponseEntity<MensagemSistema> ativarInativarUsuario(
             @PathVariable Integer id,
@@ -86,16 +91,19 @@ public class UsuarioController {
         return ResponseEntity.ok(ativarOrInativarUseCase.executar(id, dto));
     }
 
+    @WithPermissoes({Permissoes.ADMIN})
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> buscarUsuario(@PathVariable Integer id) {
         return ResponseEntity.ok(buscarUsuarioUseCase.buscar(id));
     }
 
+    @WithPermissoes({Permissoes.ADMIN})
     @DeleteMapping("/{id}")
     public ResponseEntity<MensagemSistema> excluirUsuario(@PathVariable Integer id) {
         return ResponseEntity.ok(excluirUsuarioUseCase.excluir(id));
     }
 
+    @WithPermissoes({Permissoes.ADMIN})
     @Transactional
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioCadastradoResponseDTO> atualizarUsuario(

@@ -9,4 +9,7 @@ public final class Permissoes {
     }
 
     public static final String DEFAULT = "DEFAULT";
+    public static final String ADMIN = "ADMIN";
+    public static final String USUARIO = "USUARIO";
+    public static final String ORGANIZADOR = "ORGANIZADOR";
 }

@@ -22,6 +22,14 @@ public final class UsuarioMapper {
         );
     }
 
+    public static UsuarioResponseDTO toEventoDTO(UsuarioEntity usuario) {
+        return UsuarioResponseDTO.builder()
+                .id(usuario.getId())
+                .nome(usuario.getNome())
+                .email(usuario.getEmail())
+                .build();
+    }
+
     public static UsuarioResponseDTO toPaginarOrBuscar(UsuarioEntity usuario) {
         RoleEntity role = usuario.getRole() != null ? usuario.getRole() : null;
 
