@@ -1,6 +1,8 @@
 package com.example.AppPublico.models;
 
-public class Ingresso {
+import java.io.Serializable;
+
+public class Ingresso implements Serializable {
     private String idIngresso;
     private Evento evento;
     private String dataCompra;
