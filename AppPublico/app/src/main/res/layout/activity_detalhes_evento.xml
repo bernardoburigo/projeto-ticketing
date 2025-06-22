@@ -2,48 +2,68 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@android:color/white">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
+        <!-- Imagem do Evento -->
         <ImageView
             android:id="@+id/imgEvento"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Imagem do Evento" />
+            android:src="@drawable/exemplo_evento" />
 
+        <!-- Nome do Evento -->
         <TextView
             android:id="@+id/tvNomeEvento"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nome do Evento"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginTop="16dp" />
 
+        <!-- Data e Hora -->
         <TextView
-            android:id="@+id/tvLocalEvento"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvDataHora"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Local do Evento"
+            android:text="01/07/2025 às 10:00"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Localização -->
+        <TextView
+            android:id="@+id/tvLocal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rua da Tecnologia, 123"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Artistas/Palestrantes -->
+        <TextView
+            android:id="@+id/tvArtistas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Artistas: Fulano, Ciclano"
+            android:textSize="16sp"
             android:layout_marginTop="8dp" />
 
-        <TextView
-            android:id="@+id/tvDataHoraEvento"
-            android:layout_width="wrap_content"
+        <!-- Botão de Compra -->
+        <Button
+            android:id="@+id/btnComprar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data e Hora"
-            android:layout_marginTop="8dp" />
+            android:text="Comprar Ingresso"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/purple"
+            android:textColor="@android:color/white" />
 
-        <TextView
-            android:id="@+id/tvArtistasEvento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Artistas/Palestrantes"
-            android:layout_marginTop="8dp" />
     </LinearLayout>
 </ScrollView>

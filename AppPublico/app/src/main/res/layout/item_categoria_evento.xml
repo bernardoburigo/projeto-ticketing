@@ -3,21 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="12dp">
+    android:padding="16dp"
+    android:background="@android:color/white">
 
+    <!-- Nome da Categoria -->
     <TextView
         android:id="@+id/tvNomeCategoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Categoria"
-        android:textSize="18sp"
+        android:text="Categoria Exemplo"
         android:textStyle="bold"
-        android:paddingBottom="8dp" />
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp" />
 
+    <!-- Lista horizontal de eventos dessa categoria -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEventosDaCategoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:nestedScrollingEnabled="false" />
+        android:orientation="horizontal" />
+
 </LinearLayout>

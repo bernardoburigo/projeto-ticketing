@@ -2,9 +2,8 @@ package com.example.AppPublico.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,16 +11,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.AppPublico.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class UsuarioActivity extends AppCompatActivity {
 
     private boolean isLoggedIn = true;
-    private boolean doubleBackToExitPressedOnce = false;
     private BottomNavigationView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_usuario);
+
+        Button btnHistorico = findViewById(R.id.btnHistorico);
+        Button btnLogin = findViewById(R.id.btnLogin);
+
+        btnHistorico.setOnClickListener(v -> {
+            startActivity(new Intent(this, MeusIngressosActivity.class));
+        });
+
+        btnLogin.setOnClickListener(v -> {
+            // lógica futura de login
+        });
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
@@ -35,15 +44,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-                if (id == R.id.nav_home) return true;
+                if (id == R.id.nav_home) {
+                    navigateTo(MainActivity.class);
+                    return true;
+                }
                 if (id == R.id.nav_search) {
                     navigateTo(PesquisaActivity.class);
                     return true;
                 }
-                if (id == R.id.nav_user) {
-                    navigateTo(UsuarioActivity.class);
-                    return true;
-                }
+                if (id == R.id.nav_user) return true;
                 return false;
             }
         });
@@ -53,25 +62,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (isLoggedIn && bottomNavigation != null) {
-            bottomNavigation.setSelectedItemId(R.id.nav_home);
+            bottomNavigation.setSelectedItemId(R.id.nav_user);
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Pressione novamente para sair", Toast.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+        super.onBackPressed();
+        navigateTo(MainActivity.class);
     }
 
-    private void navigateTo(Class<?> activityClass) {
-        Intent intent = new Intent(this, activityClass);
+    private void navigateTo(Class<?> targetActivity) {
+        Intent intent = new Intent(this, targetActivity);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
         overridePendingTransition(0, 0);
