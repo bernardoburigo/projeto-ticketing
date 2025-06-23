@@ -13,41 +13,34 @@ import com.example.AppPublico.models.Evento;
 
 public class DetalhesEventoActivity extends AppCompatActivity {
 
-    private ImageView imgEvento;
-    private TextView tvNomeEvento, tvDataHora, tvLocal, tvArtistas;
-    private Button btnComprar;
+    private Evento evento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_evento);
 
-        imgEvento = findViewById(R.id.imgEvento);
-        tvNomeEvento = findViewById(R.id.tvNomeEvento);
-        tvDataHora = findViewById(R.id.tvDataHora);
-        tvLocal = findViewById(R.id.tvLocal);
-        tvArtistas = findViewById(R.id.tvArtistas);
-        btnComprar = findViewById(R.id.btnComprar);
+        evento = (Evento) getIntent().getSerializableExtra("evento");
 
-        // Dados mockados
-        Evento evento = new Evento(
-                "Tech Summit 2025",
-                "Rua da Tecnologia, 123",
-                "01/07/2025",
-                "10:00",
-                R.drawable.exemplo_evento,
-                "Alice, Bob, Carol"
-        );
+        TextView tvTitulo = findViewById(R.id.tvTituloEvento);
+        TextView tvLocal = findViewById(R.id.tvLocalEvento);
+        TextView tvDataHora = findViewById(R.id.tvDataHoraEvento);
+        TextView tvArtistas = findViewById(R.id.tvArtistasEvento);
+        ImageView imgEvento = findViewById(R.id.imgEvento);
+        Button btnComprar = findViewById(R.id.btnComprarIngresso);
 
-        // Preenche os dados
-        imgEvento.setImageResource(evento.getImagemResId());
-        tvNomeEvento.setText(evento.getNome());
-        tvDataHora.setText(evento.getData() + " às " + evento.getHora());
-        tvLocal.setText(evento.getLocal());
-        tvArtistas.setText("Artistas/Palestrantes: " + evento.getArtistas());
+        if (evento != null) {
+            tvTitulo.setText(evento.getNome());
+            tvLocal.setText(evento.getLocal());
+            tvDataHora.setText(evento.getData() + " às " + evento.getHora());
+            tvArtistas.setText(evento.getArtistas());
+            imgEvento.setImageResource(evento.getImagemResId());
 
-        btnComprar.setOnClickListener(v -> {
-            // futuramente: startActivity(new Intent(this, CompraIngressoActivity.class));
-        });
+            btnComprar.setOnClickListener(v -> {
+                Intent intent = new Intent(this, CompraIngressoActivity.class);
+                intent.putExtra("evento", evento);
+                startActivity(intent);
+            });
+        }
     }
 }

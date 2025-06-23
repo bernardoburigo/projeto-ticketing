@@ -13,10 +13,14 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31" >
 
-        <activity android:name=".activities.DetalhesEventoActivity"> </activity>
-        <activity android:name=".activities.MeusIngressosActivity"> </activity>
-        <activity android:name=".activities.PesquisaActivity"> </activity>
-        <activity android:name=".activities.UsuarioActivity"> </activity>
+        <activity android:name=".activities.DetalhesEventoActivity"/>
+        <activity android:name=".activities.MeusIngressosActivity"/>
+        <activity android:name=".activities.PesquisaActivity"/>
+        <activity android:name=".activities.UsuarioActivity"/>
+        <activity android:name=".activities.LoginActivity"/>
+        <activity android:name=".activities.VerificacaoIngressoActivity"/>
+        <activity android:name=".activities.CompraIngressoActivity"/>
+        <activity android:name=".activities.DetalhesIngressoActivity"/>
 
 
         <activity

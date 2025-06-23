@@ -6,64 +6,56 @@
     android:background="@android:color/white">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <!-- Imagem do Evento -->
         <ImageView
             android:id="@+id/imgEvento"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/exemplo_evento" />
+            android:contentDescription="Imagem do evento"
+            android:src="@drawable/ic_launcher_background" />
 
-        <!-- Nome do Evento -->
         <TextView
-            android:id="@+id/tvNomeEvento"
+            android:id="@+id/tvTituloEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nome do Evento"
+            android:text="Título do Evento"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="12dp" />
 
-        <!-- Data e Hora -->
         <TextView
-            android:id="@+id/tvDataHora"
+            android:id="@+id/tvLocalEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="01/07/2025 às 10:00"
-            android:textSize="16sp"
-            android:layout_marginTop="4dp" />
-
-        <!-- Localização -->
-        <TextView
-            android:id="@+id/tvLocal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rua da Tecnologia, 123"
-            android:textSize="16sp"
-            android:layout_marginTop="4dp" />
-
-        <!-- Artistas/Palestrantes -->
-        <TextView
-            android:id="@+id/tvArtistas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Artistas: Fulano, Ciclano"
+            android:text="Local"
             android:textSize="16sp"
             android:layout_marginTop="8dp" />
 
-        <!-- Botão de Compra -->
+        <TextView
+            android:id="@+id/tvDataHoraEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data e hora"
+            android:textSize="16sp"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/tvArtistasEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Artistas/Palestrantes"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+
         <Button
-            android:id="@+id/btnComprar"
+            android:id="@+id/btnComprarIngresso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Comprar Ingresso"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/purple"
-            android:textColor="@android:color/white" />
-
+            android:layout_marginTop="16dp" />
     </LinearLayout>
 </ScrollView>

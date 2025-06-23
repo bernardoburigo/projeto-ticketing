@@ -1,6 +1,8 @@
 package com.example.AppPublico.models;
 
-public class Evento {
+import java.io.Serializable;
+
+public class Evento implements Serializable {
     private String nome;
     private String local;
     private String data;
@@ -40,4 +42,8 @@ public class Evento {
     public String getArtistas() {
         return artistas;
     }
+
+    public String getTipo() { //GAMBIARRA!!! TROCAR QUANDO POSSÍVEL
+        String tipoIngresso = "";
+        return tipoIngresso; }
 }

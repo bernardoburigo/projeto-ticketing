@@ -1,45 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layoutCompra"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp"
+    android:orientation="vertical"
     android:background="@android:color/white">
 
     <TextView
+        android:id="@+id/tvResumoEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Resumo da Compra"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:text="Resumo do Evento"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp" />
 
-    <TextView
-        android:id="@+id/tvResumo"
+    <Spinner
+        android:id="@+id/spinnerTipoIngresso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Evento X - R$ 50,00"
-        android:layout_marginTop="8dp" />
+        android:layout_marginBottom="12dp" />
 
     <EditText
-        android:id="@+id/etCupom"
+        android:id="@+id/edtCupom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Digite o cupom de desconto"
-        android:layout_marginTop="16dp"
-        android:inputType="text" />
-
-    <Button
-        android:id="@+id/btnAplicarCupom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Aplicar Cupom"
-        android:layout_marginTop="8dp" />
+        android:hint="Cupom de desconto (opcional)"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btnConfirmarCompra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirmar Compra"
-        android:layout_marginTop="24dp" />
+        android:text="Confirmar Compra" />
 </LinearLayout>
