@@ -30,7 +30,8 @@
         android:inputType="textEmailAddress"
         android:padding="12dp"
         android:backgroundTint="#3A94E8"
-        android:textColorHint="#A4BDF1"
+        android:textColorHint="@color/azul_secundario"
+        android:textColor="@color/black"
         android:fontFamily="@font/open_sans"
         android:layout_marginBottom="16dp" />
 
@@ -42,7 +43,8 @@
         android:inputType="textPassword"
         android:padding="12dp"
         android:backgroundTint="#3A94E8"
-        android:textColorHint="#A4BDF1"
+        android:textColorHint="@color/azul_secundario"
+        android:textColor="@color/black"
         android:fontFamily="@font/open_sans"
         android:layout_marginBottom="24dp" />
 
@@ -51,9 +53,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Entrar"
-        android:backgroundTint="#1A3B9F"
+        android:backgroundTint="@color/azul_primario"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:fontFamily="@font/open_sans"/>
+
+    <TextView
+        android:id="@+id/tvCriarConta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Criar nova conta"
+        android:gravity="center"
+        android:textColor="@color/azul_primario"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp" />
 
 </LinearLayout>

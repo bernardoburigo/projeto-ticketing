@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/azul_primario"
-        app:itemIconTint="@color/branco"
-        app:itemTextColor="@color/branco"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
         app:menu="@menu/bottom_navigation_menu" />
 </FrameLayout>

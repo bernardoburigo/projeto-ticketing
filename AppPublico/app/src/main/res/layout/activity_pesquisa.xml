@@ -20,8 +20,9 @@
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="8dp"
             android:hint="Buscar eventos..."
-            android:backgroundTint="#3A94E8"
+            android:backgroundTint="@color/azul_secundario"
             android:textColorHint="#A4BDF1"
+            android:textColor="@color/black"
             android:fontFamily="@font/open_sans"
             android:padding="12dp"
             android:layout_marginTop="50dp"/>
@@ -39,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/azul_primario"
-        app:itemIconTint="@color/branco"
-        app:itemTextColor="@color/branco"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
         app:menu="@menu/bottom_navigation_menu" />
 </FrameLayout>
