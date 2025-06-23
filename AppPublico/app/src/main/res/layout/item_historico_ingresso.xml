@@ -16,7 +16,9 @@
         android:text="Nome do Evento"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#000000"/>
+        android:textColor="#1A3B9F"
+        android:fontFamily="@font/open_sans"
+        android:layout_marginTop="50sp"/>
 
     <TextView
         android:id="@+id/textDataEvento"
@@ -24,6 +26,7 @@
         android:layout_height="wrap_content"
         android:text="Data"
         android:textColor="#666666"
+        android:fontFamily="@font/open_sans"
         android:paddingTop="4dp"/>
 
     <TextView
@@ -32,6 +35,7 @@
         android:layout_height="wrap_content"
         android:text="Local"
         android:textColor="#666666"
+        android:fontFamily="@font/open_sans"
         android:paddingTop="2dp"/>
 
     <TextView
@@ -40,6 +44,7 @@
         android:layout_height="wrap_content"
         android:text="Hora"
         android:textColor="#666666"
+        android:fontFamily="@font/open_sans"
         android:paddingTop="2dp"/>
 
     <TextView
@@ -48,5 +53,6 @@
         android:layout_height="wrap_content"
         android:text="Valor Pago"
         android:textColor="#666666"
+        android:fontFamily="@font/open_sans"
         android:paddingTop="2dp"/>
 </LinearLayout>

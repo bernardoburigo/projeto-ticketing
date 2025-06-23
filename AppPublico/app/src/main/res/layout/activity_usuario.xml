@@ -19,19 +19,28 @@
             android:text="Bem-vindo, usuário!"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
+            android:textColor="#1A3B9F"
+            android:fontFamily="@font/open_sans"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="50dp"/>
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:backgroundTint="#1A3B9F"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:text="Fazer Login" />
 
         <Button
             android:id="@+id/btnHistorico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#1A3B9F"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:text="Ver Meus Ingressos" />
 
         <Button
@@ -39,6 +48,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sair da Conta"
+            android:backgroundTint="#1A3B9F"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
             android:layout_marginBottom="24dp" />
     </LinearLayout>
 
@@ -47,6 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/white"
+        android:background="@color/azul_primario"
+        app:itemIconTint="@color/branco"
+        app:itemTextColor="@color/branco"
         app:menu="@menu/bottom_navigation_menu" />
 </FrameLayout>

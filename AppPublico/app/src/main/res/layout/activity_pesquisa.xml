@@ -17,11 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:background="@android:drawable/edit_text"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="8dp"
             android:hint="Buscar eventos..."
-            android:padding="12dp" />
+            android:backgroundTint="#3A94E8"
+            android:textColorHint="#A4BDF1"
+            android:fontFamily="@font/open_sans"
+            android:padding="12dp"
+            android:layout_marginTop="50dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvResultados"
@@ -35,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/white"
+        android:background="@color/azul_primario"
+        app:itemIconTint="@color/branco"
+        app:itemTextColor="@color/branco"
         app:menu="@menu/bottom_navigation_menu" />
 </FrameLayout>

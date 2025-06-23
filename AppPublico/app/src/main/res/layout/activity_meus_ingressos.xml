@@ -13,8 +13,11 @@
         android:text="Meus Ingressos"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#1A3B9F"
+        android:fontFamily="@font/open_sans"
         android:gravity="center"
-        android:paddingBottom="16dp" />
+        android:paddingBottom="16dp"
+        android:layout_marginTop="50dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewIngressos"

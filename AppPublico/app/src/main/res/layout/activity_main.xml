@@ -7,44 +7,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activities.MainActivity"
-    android:background="@android:color/white">
+    android:background="@color/branco">
 
-    <!-- Conteúdo principal -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp">
 
             <TextView
                 android:id="@+id/tvDestaques"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Eventos em Destaque"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+                android:fontFamily="@font/open_sans"
+                android:textColor="@color/azul_primario"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="50dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDestaques"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:orientation="horizontal"
-                android:layout_marginBottom="16dp" />
+                android:layout_marginBottom="24dp" />
 
             <TextView
                 android:id="@+id/tvCategorias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Eventos por Categoria"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
+                android:fontFamily="@font/open_sans"
+                android:textColor="@color/azul_primario"
+                android:layout_marginBottom="12dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCategorias"
@@ -57,7 +63,10 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/azul_primario"
+        app:itemIconTint="@color/branco"
+        app:itemTextColor="@color/branco"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />
 
 </LinearLayout>

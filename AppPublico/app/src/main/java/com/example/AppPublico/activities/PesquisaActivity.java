@@ -22,12 +22,6 @@ public class PesquisaActivity extends AppCompatActivity {
 
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
-        if (!isLoggedIn) {
-            bottomNavigation.setVisibility(BottomNavigationView.GONE);
-        } else {
-            bottomNavigation.setVisibility(BottomNavigationView.VISIBLE);
-        }
-
         bottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

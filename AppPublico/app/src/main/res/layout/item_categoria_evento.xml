@@ -13,8 +13,11 @@
         android:layout_height="wrap_content"
         android:text="Categoria Exemplo"
         android:textStyle="bold"
+        android:textColor="#1A3B9F"
+        android:fontFamily="@font/open_sans"
         android:textSize="18sp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="50dp"/>
 
     <!-- Lista horizontal de eventos dessa categoria -->
     <androidx.recyclerview.widget.RecyclerView

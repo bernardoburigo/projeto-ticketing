@@ -17,13 +17,18 @@
             android:text="Nome do Evento"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:textColor="#1A3B9F"
+            android:fontFamily="@font/open_sans"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="50dp"/>
 
         <TextView
             android:id="@+id/tvDetalhesEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Local, Data e Hora"
+            android:textColor="#3A3A3A"
+            android:fontFamily="@font/open_sans"
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -31,6 +36,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Tipo: VIP"
+            android:textColor="#3A3A3A"
+            android:fontFamily="@font/open_sans"
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -38,6 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Valor Pago: R$ 0,00"
+            android:textColor="#3A3A3A"
+            android:fontFamily="@font/open_sans"
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -45,6 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Data da Compra"
+            android:textColor="#3A3A3A"
+            android:fontFamily="@font/open_sans"
             android:layout_marginBottom="8dp" />
 
         <TextView
@@ -52,6 +63,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Código: #123456"
+            android:textColor="#3A3A3A"
+            android:fontFamily="@font/open_sans"
             android:layout_marginBottom="16dp" />
 
         <ImageView

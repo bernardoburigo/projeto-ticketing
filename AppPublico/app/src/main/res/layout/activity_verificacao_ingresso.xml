@@ -1,17 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="@android:color/white">
 
-    <TextView
-        android:id="@+id/tvVerificacao"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Verificação de Ingressos"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
-</LinearLayout>
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escanear QR Code"
+            android:backgroundTint="#1A3B9F"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:fontFamily="@font/open_sans"
+            android:padding="16dp"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:id="@+id/tvResultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resultado da verificação aparecerá aqui."
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:fontFamily="@font/open_sans"
+            android:textStyle="bold" />
+
+        <!-- Detalhes do ingresso -->
+        <TextView
+            android:id="@+id/tvNomeEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:fontFamily="@font/open_sans"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/tvLocalEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/tvDataHoraEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/tvValorPago"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:text="" />
+
+    </LinearLayout>
+</ScrollView>

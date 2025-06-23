@@ -19,6 +19,8 @@
         android:layout_height="wrap_content"
         android:text="Título do Evento"
         android:textStyle="bold"
+        android:textColor="#1A3B9F"
+        android:fontFamily="@font/open_sans"
         android:textSize="18sp"
         android:layout_marginTop="8dp" />
 
@@ -26,6 +28,7 @@
         android:id="@+id/dataLocalEvento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans"
         android:text="Data • Local"
         android:textSize="14sp"
         android:textColor="#666" />
