@@ -37,7 +37,7 @@ public class VendaEntity extends Auditoria {
     @Column(name = "data_venda", nullable = false)
     private ZonedDateTime dataVenda;
 
-    @Column(name = "valor_total", nullable = false)
+    @Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorTotal;
 
     @Column(nullable = false)

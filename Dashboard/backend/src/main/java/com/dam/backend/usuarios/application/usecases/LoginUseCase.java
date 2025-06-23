@@ -1,7 +1,6 @@
 package com.dam.backend.usuarios.application.usecases;
 
 import com.dam.backend.entities.UsuarioEntity;
-import com.dam.backend.shared.exceptions.EntidadeNaoEncontradaException;
 import com.dam.backend.shared.utils.FormateDateUtil;
 import com.dam.backend.usuarios.infra.controllers.dto.request.LoginRequestDTO;
 import com.dam.backend.usuarios.infra.controllers.dto.response.LoginResponseDTO;
@@ -35,9 +34,9 @@ public class LoginUseCase {
 
     public ResponseEntity<LoginResponseDTO> login(LoginRequestDTO dto) {
         UsuarioEntity usuario = usuarioRepository.findByEmail(dto.email())
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuário não encontrado."));
+                .orElseThrow(LoginIncorretoException::new);
 
-        if (!isLoginValid(dto.senha(), usuario.getSenha(), passwordEncoder)) {
+        if (!isLoginValid(dto.senha(), usuario.getSenha(), passwordEncoder) || usuarioInvalido(usuario)) {
             throw new LoginIncorretoException();
         }
 
@@ -46,6 +45,10 @@ public class LoginUseCase {
 
     private boolean isLoginValid(String senhaRequest, String senhaBanco, PasswordEncoder passwordEncoder) {
         return passwordEncoder.matches(senhaRequest, senhaBanco);
+    }
+
+    private boolean usuarioInvalido(UsuarioEntity usuario) {
+        return !usuario.isAtivo() || usuario.isExcluido();
     }
 
     private LoginResponseDTO buildJWT(UsuarioEntity usuario) {

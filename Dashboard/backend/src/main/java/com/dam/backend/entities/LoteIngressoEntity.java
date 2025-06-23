@@ -10,13 +10,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "lotes_ingresso")
+@Table(name = "lotes_ingresso", uniqueConstraints = {
+        @UniqueConstraint(
+                name = "uk_evento_tipo_nome",
+                columnNames = {"i_evento", "i_tipo_ingresso", "nome"}
+        )
+})
 @Getter
 @Setter
 public class LoteIngressoEntity extends Auditoria {
@@ -26,6 +32,9 @@ public class LoteIngressoEntity extends Auditoria {
     @Column(name = "i_lote_ingresso")
     private Integer id;
 
+    @Column(nullable = false)
+    private String nome;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "i_evento", nullable = false)
     private EventosEntity evento;
@@ -34,13 +43,13 @@ public class LoteIngressoEntity extends Auditoria {
     @JoinColumn(name = "i_tipo_ingresso", nullable = false)
     private TipoIngressoEntity tipoIngresso;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
 
     @Column(name = "quantidade_total", nullable = false)
     private Integer quantidadeTotal;
 
-    @Column(name = "quantidade_vendida", nullable = false)
+    @Column(name = "quantidade_vendida")
     private Integer quantidadeVendida;
 
     @Column(name = "data_inicio_venda", nullable = false)

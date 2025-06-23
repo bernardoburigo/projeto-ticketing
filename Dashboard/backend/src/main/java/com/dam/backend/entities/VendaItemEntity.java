@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,8 +34,8 @@ public class VendaItemEntity extends Auditoria {
     private LoteIngressoEntity loteIngressoEntity;
 
     @Column(nullable = false)
-    private Integer qauntidade;
+    private Integer quantidade;
 
-    @Column(name = "valor_unitario", nullable = false)
-    private Double valorUnitario;
+    @Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
+    private BigDecimal valorUnitario;
 }
