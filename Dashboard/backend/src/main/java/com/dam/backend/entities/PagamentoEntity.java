@@ -36,7 +36,7 @@ public class PagamentoEntity extends Auditoria {
     @Column(name = "status_pagamento", nullable = false)
     private Integer statusPagamento;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;
 
     @Column(name = "qr_code", columnDefinition = "TEXT")

@@ -4,6 +4,7 @@ import com.dam.backend.entities.RoleEntity;
 import com.dam.backend.entities.UsuarioEntity;
 import com.dam.backend.shared.exceptions.ClasseNaoInstanciavelException;
 import com.dam.backend.shared.utils.FormateDateUtil;
+import com.dam.backend.usuarios.infra.controllers.dto.response.OrganizadorResponseDTO;
 import com.dam.backend.usuarios.infra.controllers.dto.response.UsuarioCadastradoResponseDTO;
 import com.dam.backend.usuarios.infra.controllers.dto.response.UsuarioResponseDTO;
 
@@ -22,11 +23,12 @@ public final class UsuarioMapper {
         );
     }
 
-    public static UsuarioResponseDTO toEventoDTO(UsuarioEntity usuario) {
-        return UsuarioResponseDTO.builder()
+    public static OrganizadorResponseDTO toEventoDTO(UsuarioEntity usuario) {
+        return OrganizadorResponseDTO.builder()
                 .id(usuario.getId())
                 .nome(usuario.getNome())
                 .email(usuario.getEmail())
+                .ativo(usuario.isAtivo())
                 .build();
     }
 

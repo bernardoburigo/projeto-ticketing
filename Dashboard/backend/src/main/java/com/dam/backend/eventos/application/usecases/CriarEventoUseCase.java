@@ -72,8 +72,17 @@ public class CriarEventoUseCase {
     }
 
     private UsuarioEntity buscarUsuarioEvento(Integer id) {
-        return usuarioRepositoryGateway.findById(id)
+        UsuarioEntity usuario = usuarioRepositoryGateway.findById(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("categoria do evento não encontrado."));
+
+        validarOrganizador(usuario);
+        return usuario;
+    }
+
+    private void validarOrganizador(UsuarioEntity usuario) {
+        if (!usuario.isAtivo() || usuario.isExcluido()) {
+            throw new ModelException("Não pode criar evento com organizador inativo ou excluído");
+        }
     }
 
     private EventosEntity buildEvento(

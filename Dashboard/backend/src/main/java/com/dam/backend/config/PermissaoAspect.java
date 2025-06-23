@@ -26,7 +26,7 @@ public class PermissaoAspect {
         for (String permissaoNecessaria : withPermissoes.value()) {
             if (!permissoesUsuario.contains(permissaoNecessaria)) {
                 throw new ModelException(
-                        "Acesso negado. Permissão requerida: " + permissaoNecessaria,
+                        "Acesso negado. Permissão necessária: " + permissaoNecessaria,
                         HttpStatus.FORBIDDEN
                 );
             }

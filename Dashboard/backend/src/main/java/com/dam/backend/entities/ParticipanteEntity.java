@@ -45,6 +45,6 @@ public class ParticipanteEntity extends Auditoria {
     @Column(nullable = false)
     private boolean checkin;
 
-    @Column(name = "data_checkin", nullable = false)
+    @Column(name = "data_checkin")
     private ZonedDateTime dataCheckin;
 }
