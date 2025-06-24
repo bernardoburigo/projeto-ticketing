@@ -6,6 +6,7 @@ import com.dam.backend.locaiseventos.infra.mappers.LocalEventoMapper;
 import com.dam.backend.locaiseventos.infra.repositories.LocaisEventosRepository;
 import com.dam.backend.shared.utils.PaginationUtil;
 import com.dam.backend.shared.utils.dto.PaginarDTO;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public class PaginarLocalEventoUseCase {
 
     private final LocaisEventosRepository locaisEventosRepository;
 
+    @Lazy
     public PaginarLocalEventoUseCase(LocaisEventosRepository locaisEventosRepository) {
         this.locaisEventosRepository = locaisEventosRepository;
     }

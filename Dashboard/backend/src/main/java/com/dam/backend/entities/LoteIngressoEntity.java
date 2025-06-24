@@ -43,6 +43,9 @@ public class LoteIngressoEntity extends Auditoria {
     @JoinColumn(name = "i_tipo_ingresso", nullable = false)
     private TipoIngressoEntity tipoIngresso;
 
+    @Column(name = "numero_lote")
+    private Integer numeroLote;
+
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal preco;
 
@@ -50,7 +53,7 @@ public class LoteIngressoEntity extends Auditoria {
     private Integer quantidadeTotal;
 
     @Column(name = "quantidade_vendida")
-    private Integer quantidadeVendida;
+    private Integer quantidadeVendida = 0;
 
     @Column(name = "data_inicio_venda", nullable = false)
     private ZonedDateTime dataInicioVenda;

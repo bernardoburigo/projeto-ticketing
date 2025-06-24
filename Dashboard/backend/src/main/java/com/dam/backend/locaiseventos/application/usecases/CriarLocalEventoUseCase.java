@@ -6,6 +6,7 @@ import com.dam.backend.locaiseventos.infra.repositories.LocaisEventosRepository;
 import com.dam.backend.shared.exceptions.ModelException;
 import com.dam.backend.shared.utils.dto.MensagemSistema;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,7 @@ public class CriarLocalEventoUseCase {
 
     private final LocaisEventosRepository locaisEventosRepository;
 
+    @Lazy
     public CriarLocalEventoUseCase(LocaisEventosRepository locaisEventosRepository) {
         this.locaisEventosRepository = locaisEventosRepository;
     }

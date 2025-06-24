@@ -9,6 +9,7 @@ import com.dam.backend.usuarios.infra.repositories.UsuarioRepository;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +25,7 @@ public class LoginUseCase {
     private final UsuarioRepository usuarioRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    @Lazy
     public LoginUseCase(JwtEncoder jwtEncoder,
                         UsuarioRepository usuarioRepository,
                         BCryptPasswordEncoder passwordEncoder) {

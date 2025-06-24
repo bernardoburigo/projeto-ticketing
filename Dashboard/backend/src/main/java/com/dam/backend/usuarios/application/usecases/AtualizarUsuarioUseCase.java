@@ -12,6 +12,7 @@ import com.dam.backend.usuarios.infra.repositories.RoleRepository;
 import com.dam.backend.usuarios.infra.repositories.UsuarioRepository;
 import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class AtualizarUsuarioUseCase {
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    @Lazy
     public AtualizarUsuarioUseCase(UsuarioRepository usuarioRepository,
                                    RoleRepository roleRepository,
                                    BCryptPasswordEncoder passwordEncoder) {

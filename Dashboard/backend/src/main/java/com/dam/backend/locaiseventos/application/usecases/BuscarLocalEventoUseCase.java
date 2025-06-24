@@ -5,6 +5,7 @@ import com.dam.backend.locaiseventos.infra.controllers.dto.response.LocaisEvento
 import com.dam.backend.locaiseventos.infra.mappers.LocalEventoMapper;
 import com.dam.backend.locaiseventos.infra.repositories.LocaisEventosRepository;
 import com.dam.backend.shared.exceptions.EntidadeNaoEncontradaException;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,7 @@ public class BuscarLocalEventoUseCase {
 
     private final LocaisEventosRepository locaisEventosRepository;
 
+    @Lazy
     public BuscarLocalEventoUseCase(LocaisEventosRepository locaisEventosRepository) {
         this.locaisEventosRepository = locaisEventosRepository;
     }

@@ -9,10 +9,10 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StatusLoteIngressoEnum {
 
-    FUTURA(1, "1° lote"),
-    DISPONIVEL(2, "2° lote"),
-    ESGOTADO(3, "3° lote"),
-    EXPIRADO(4, "4° lote");
+    FUTURA(1, "Futura"),
+    DISPONIVEL(2, "Disponivel"),
+    ESGOTADO(3, "Esgotado"),
+    EXPIRADO(4, "Expirado");
 
     private final Integer id;
     private final String statusLote;
