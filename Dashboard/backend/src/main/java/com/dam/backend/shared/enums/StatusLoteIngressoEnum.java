@@ -12,7 +12,8 @@ public enum StatusLoteIngressoEnum {
     FUTURA(1, "Futura"),
     DISPONIVEL(2, "Disponivel"),
     ESGOTADO(3, "Esgotado"),
-    EXPIRADO(4, "Expirado");
+    EXPIRADO(4, "Expirado"),
+    INDISPONIVEL(5, "Indisponivel");
 
     private final Integer id;
     private final String statusLote;

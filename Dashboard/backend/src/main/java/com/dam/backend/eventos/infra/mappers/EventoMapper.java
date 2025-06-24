@@ -33,6 +33,7 @@ public final class EventoMapper {
                 .categoria(CategoriaEventoMapper.toDTO(categoriaEvento))
                 .organizador(UsuarioMapper.toEventoDTO(organizador))
                 .statusEvento(StatusEventoEnum.getStatus(evento.getStatus()))
+                .imagemNome("http://localhost:8080/eventos/imagens/" + evento.getImagemNome())
                 .build();
     }
 

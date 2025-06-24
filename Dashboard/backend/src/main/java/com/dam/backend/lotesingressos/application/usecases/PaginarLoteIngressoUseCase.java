@@ -1,7 +1,7 @@
 package com.dam.backend.lotesingressos.application.usecases;
 
 import com.dam.backend.entities.LoteIngressoEntity;
-import com.dam.backend.lotesingressos.infra.controllers.dto.response.PaginarLoteIngressoResponseDTO;
+import com.dam.backend.lotesingressos.infra.controllers.dto.response.PaginarOrBuscarLoteIngressoResponseDTO;
 import com.dam.backend.lotesingressos.infra.mappers.LoteIngressoMapper;
 import com.dam.backend.lotesingressos.infra.repositories.LoteIngressoRepository;
 import com.dam.backend.shared.utils.PaginationUtil;
@@ -25,7 +25,7 @@ public class PaginarLoteIngressoUseCase {
         this.loteIngressoRepository = loteIngressoRepository;
     }
 
-    public Page<PaginarLoteIngressoResponseDTO> paginar(PaginarDTO dto) {
+    public Page<PaginarOrBuscarLoteIngressoResponseDTO> paginar(PaginarDTO dto) {
         PageRequest pageRequest = PaginationUtil.paginar(dto);
 
         Page<LoteIngressoEntity> loteIngresso = loteIngressoRepository.findAllByAtivo(dto.search(), pageRequest);
@@ -34,19 +34,13 @@ public class PaginarLoteIngressoUseCase {
             return PaginationUtil.paginaVazia(pageRequest);
         }
 
-        Map<String, List<LoteIngressoEntity>> agrupado = loteIngresso.getContent().stream()
-                .collect(Collectors.groupingBy(this::gerarChaveAgrupamento));
+        Map<Integer, List<LoteIngressoEntity>> agrupadoPorEvento = loteIngresso.stream()
+                .collect(Collectors.groupingBy(l -> l.getEvento().getId()));
 
-        List<PaginarLoteIngressoResponseDTO> conteudo = agrupado.values().stream()
+        List<PaginarOrBuscarLoteIngressoResponseDTO> conteudo = agrupadoPorEvento.values().stream()
                 .map(LoteIngressoMapper::toDTO)
                 .toList();
 
         return new PageImpl<>(conteudo, pageRequest, loteIngresso.getTotalElements());
-    }
-
-    private String gerarChaveAgrupamento(LoteIngressoEntity lote) {
-        return String.format("%d-%d",
-                lote.getEvento().getId(),
-                lote.getTipoIngresso().getId());
     }
 }

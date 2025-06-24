@@ -16,16 +16,11 @@ public interface LoteIngressoRepository extends JpaRepository<LoteIngressoEntity
 
     List<LoteIngressoEntity> findByEventoAndTipoIngresso(EventosEntity evento, TipoIngressoEntity tipoIngresso);
 
-    boolean existsByEventoAndTipoIngressoAndNome(EventosEntity evento, TipoIngressoEntity tipoIngresso, String nome);
-
     @Query("SELECT li FROM LoteIngressoEntity li " +
             "WHERE ( " +
             "  li.nome ILIKE CONCAT('%', :search, '%') OR " +
             "  li.evento.nome ILIKE CONCAT('%', :search, '%') OR " +
             "  li.tipoIngresso.nome ILIKE CONCAT('%', :search, '%') " +
-            ") " +
-            "AND li.excluido IS FALSE")
+            ") ")
     Page<LoteIngressoEntity> findAllByAtivo(@Param("search") String search, PageRequest pageRequest);
-
-    List<LoteIngressoEntity> findByEventoAndTipoIngressoOrderByNumeroLote(EventosEntity evento, TipoIngressoEntity tipoIngresso);
 }

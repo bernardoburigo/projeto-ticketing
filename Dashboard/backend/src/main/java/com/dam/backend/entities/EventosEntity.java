@@ -51,4 +51,7 @@ public class EventosEntity extends Auditoria {
 
     @Column(nullable = false)
     private Integer status;
+
+    @Column(name = "imagem_nome")
+    private String imagemNome;
 }

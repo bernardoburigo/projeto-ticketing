@@ -4,7 +4,7 @@ import com.dam.backend.entities.EventosEntity;
 import com.dam.backend.entities.LoteIngressoEntity;
 import com.dam.backend.entities.TipoIngressoEntity;
 import com.dam.backend.lotesingressos.application.gateways.EventoRepositoryGateway;
-import com.dam.backend.lotesingressos.infra.controllers.dto.request.CriarLoteIngressoRequestDTO;
+import com.dam.backend.lotesingressos.infra.controllers.dto.request.LoteIngressoRequestDTO;
 import com.dam.backend.lotesingressos.infra.repositories.LoteIngressoRepository;
 import com.dam.backend.lotesingressos.infra.repositories.TipoIngressoRepository;
 import com.dam.backend.shared.exceptions.ModelException;
@@ -37,7 +37,7 @@ public class LoteIngressoService {
         this.tipoIngressoRepository = tipoIngressoRepository;
     }
 
-    public MensagemSistema criar(CriarLoteIngressoRequestDTO dto) {
+    public MensagemSistema criar(LoteIngressoRequestDTO dto) {
         EventosEntity evento = eventoRepositoryGateway.findByIdAndAtivo(dto.evento());
         ConstraintsUtil.requireNonNull(evento, "Deve ser adicionado um evento existente e ativo");
 
@@ -75,7 +75,30 @@ public class LoteIngressoService {
         return new MensagemSistema("Lote criado com sucesso!");
     }
 
-    private void validarEntradas(CriarLoteIngressoRequestDTO dto, EventosEntity evento, TipoIngressoEntity tipoIngresso) {
+//    public DetalhesLoteIngressoResponseDTO editar(Integer id, LoteIngressoRequestDTO dto) {
+//        LoteIngressoEntity loteIngresso = loteIngressoRepository.findById(id)
+//                .orElseThrow(() -> new EntidadeNaoEncontradaException("Lote de ingresso não encontrado."));
+//
+//        EventosEntity evento = eventoRepositoryGateway.findByIdAndAtivo(dto.evento());
+//        ConstraintsUtil.requireNonNull(evento, "Deve ser adicionado um evento existente e ativo");
+//
+//        TipoIngressoEntity tipoIngresso = tipoIngressoRepository.findById(dto.tipoIngresso())
+//                .orElseThrow(() -> new ModelException("Deve ser adicionado um tipo de ingresso existente"));
+//
+//        validarEntradas(dto, evento, tipoIngresso);
+//
+//        loteIndisponivel(loteIngresso.isAtivo(), loteIngresso.isExcluido());
+//
+//        loteIngresso.setNome();
+//    }
+
+    private void loteIndisponivel(boolean ativo, boolean excluido) {
+        if (!ativo || excluido) {
+            throw new ModelException("Não pode editar um lote indisponivel");
+        }
+    }
+
+    private void validarEntradas(LoteIngressoRequestDTO dto, EventosEntity evento, TipoIngressoEntity tipoIngresso) {
 
         if (dto.quantidadeLotes() == null || dto.quantidadeLotes() <= 0) {
             throw new ModelException("A quantidade de lotes deve ser maior que zero.");

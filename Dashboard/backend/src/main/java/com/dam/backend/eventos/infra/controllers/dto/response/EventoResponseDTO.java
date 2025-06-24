@@ -14,5 +14,6 @@ public record EventoResponseDTO(
         LocaisEventoResponseDTO localEvento,
         CategoriaEventoResponseDTO categoria,
         OrganizadorResponseDTO organizador,
-        String statusEvento) {
+        String statusEvento,
+        String imagemNome) {
 }

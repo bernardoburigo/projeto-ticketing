@@ -17,11 +17,11 @@ import com.dam.backend.shared.exceptions.ModelException;
 import com.dam.backend.shared.utils.ConstraintsUtil;
 import com.dam.backend.shared.utils.PaginationUtil;
 import com.dam.backend.shared.utils.dto.PaginarDTO;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class EventoService {
@@ -30,25 +30,28 @@ public class EventoService {
     private final LocaisEventosRepositoryGateway locaisEventosRepositoryGateway;
     private final UsuarioRepositoryGateway usuarioRepositoryGateway;
     private final CategoriaEventoRepository categoriaEventoRepository;
+    private final ImagemService imagemService;
 
     @Lazy
     public EventoService(EventoRepository eventoRepository,
-                               LocaisEventosRepositoryGateway locaisEventosRepositoryGateway,
-                               UsuarioRepositoryGateway usuarioRepositoryGateway,
-                               CategoriaEventoRepository categoriaEventoRepository) {
+                         LocaisEventosRepositoryGateway locaisEventosRepositoryGateway,
+                         UsuarioRepositoryGateway usuarioRepositoryGateway,
+                         CategoriaEventoRepository categoriaEventoRepository,
+                         ImagemService imagemService) {
         this.eventoRepository = eventoRepository;
         this.locaisEventosRepositoryGateway = locaisEventosRepositoryGateway;
         this.usuarioRepositoryGateway = usuarioRepositoryGateway;
         this.categoriaEventoRepository = categoriaEventoRepository;
+        this.imagemService = imagemService;
     }
 
-    public EventoResponseDTO criar(EventoRequestDTO dto) {
+    public EventoResponseDTO criar(EventoRequestDTO dto, MultipartFile file) {
         validarResposta(dto);
 
         LocalEventoEntity localEvento = buscarLocaisEventos(dto.localEvento());
         CategoriaEventoEntity categoriaEvento = buscarCategoriaEvento(dto.categoria());
         UsuarioEntity usuarioEvento = buscarUsuarioEvento(dto.organizador());
-        EventosEntity evento = buildEvento(dto, localEvento, categoriaEvento, usuarioEvento);
+        EventosEntity evento = buildEvento(dto, localEvento, categoriaEvento, usuarioEvento, file);
 
         return EventoMapper.toDTO(evento, localEvento, categoriaEvento, usuarioEvento);
     }
@@ -68,7 +71,7 @@ public class EventoService {
         Page<EventosEntity> eventos = eventoRepository.paginarPorAtivo(dto.search(), pageRequest);
 
         if (eventos.isEmpty()) {
-            return  PaginationUtil.paginaVazia(pageRequest);
+            return PaginationUtil.paginaVazia(pageRequest);
         }
 
         return eventos.map(evento -> {
@@ -81,7 +84,7 @@ public class EventoService {
     }
 
     private void validarResposta(EventoRequestDTO dto) {
-        if (StringUtils.isBlank(dto.nome())) {
+        if (org.apache.commons.lang3.StringUtils.isBlank(dto.nome())) {
             throw new ModelException("Nome não pode ser nulo ou vazio");
         }
 
@@ -125,7 +128,14 @@ public class EventoService {
             EventoRequestDTO dto,
             LocalEventoEntity localEvento,
             CategoriaEventoEntity categoriaEvento,
-            UsuarioEntity organizadorEvento) {
+            UsuarioEntity organizadorEvento,
+            MultipartFile file) {
+        String nameImage = null;
+
+        if (file != null && !file.isEmpty()) {
+            nameImage = imagemService.salvarImagem(file);
+        }
+
         EventosEntity evento = new EventosEntity();
         evento.setNome(dto.nome());
         evento.setDescricao(dto.descricao());
@@ -135,6 +145,7 @@ public class EventoService {
         evento.setCategoria(categoriaEvento);
         evento.setOrganizador(organizadorEvento);
         evento.setStatus(StatusEventoEnum.ATIVO.getId());
+        evento.setImagemNome(nameImage);
         return eventoRepository.save(evento);
     }
 }
