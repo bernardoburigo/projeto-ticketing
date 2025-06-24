@@ -4,6 +4,7 @@ import com.dam.backend.entities.UsuarioEntity;
 import com.dam.backend.shared.exceptions.EntidadeNaoEncontradaException;
 import com.dam.backend.shared.utils.dto.MensagemSistema;
 import com.dam.backend.usuarios.infra.repositories.UsuarioRepository;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,6 +12,7 @@ public class ExcluirUsuarioUseCase {
 
     private final UsuarioRepository usuarioRepository;
 
+    @Lazy
     public ExcluirUsuarioUseCase(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }

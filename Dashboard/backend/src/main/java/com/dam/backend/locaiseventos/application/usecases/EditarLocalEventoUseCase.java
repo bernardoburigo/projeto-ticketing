@@ -7,6 +7,7 @@ import com.dam.backend.shared.exceptions.EntidadeNaoEncontradaException;
 import com.dam.backend.shared.exceptions.ModelException;
 import com.dam.backend.shared.utils.dto.MensagemSistema;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,7 @@ public class EditarLocalEventoUseCase {
 
     private final LocaisEventosRepository locaisEventosRepository;
 
+    @Lazy
     public EditarLocalEventoUseCase(LocaisEventosRepository locaisEventosRepository) {
         this.locaisEventosRepository = locaisEventosRepository;
     }

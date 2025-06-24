@@ -11,6 +11,7 @@ import com.dam.backend.usuarios.infra.mappers.UsuarioMapper;
 import com.dam.backend.usuarios.infra.repositories.RoleRepository;
 import com.dam.backend.usuarios.infra.repositories.UsuarioRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ public class CadastrarUsuarioUseCase {
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    @Lazy
     public CadastrarUsuarioUseCase(UsuarioRepository usuarioRepository,
                                    RoleRepository roleRepository,
                                    BCryptPasswordEncoder passwordEncoder) {

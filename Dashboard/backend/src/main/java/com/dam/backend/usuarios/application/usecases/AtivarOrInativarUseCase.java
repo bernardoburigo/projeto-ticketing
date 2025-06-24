@@ -6,6 +6,7 @@ import com.dam.backend.shared.utils.ConstraintsUtil;
 import com.dam.backend.shared.utils.dto.MensagemSistema;
 import com.dam.backend.usuarios.infra.controllers.dto.request.AtivarInativarUsuarioRequestDTO;
 import com.dam.backend.usuarios.infra.repositories.UsuarioRepository;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,7 @@ public class AtivarOrInativarUseCase {
 
     private final UsuarioRepository usuarioRepository;
 
+    @Lazy
     public AtivarOrInativarUseCase(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }

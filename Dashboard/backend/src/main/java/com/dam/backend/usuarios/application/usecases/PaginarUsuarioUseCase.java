@@ -6,6 +6,7 @@ import com.dam.backend.shared.utils.dto.PaginarDTO;
 import com.dam.backend.usuarios.infra.controllers.dto.response.UsuarioResponseDTO;
 import com.dam.backend.usuarios.infra.mappers.UsuarioMapper;
 import com.dam.backend.usuarios.infra.repositories.UsuarioRepository;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public class PaginarUsuarioUseCase {
 
     private final UsuarioRepository usuarioRepository;
 
+    @Lazy
     public PaginarUsuarioUseCase(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }

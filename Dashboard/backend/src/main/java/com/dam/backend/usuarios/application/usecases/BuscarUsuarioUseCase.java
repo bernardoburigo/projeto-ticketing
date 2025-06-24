@@ -5,6 +5,7 @@ import com.dam.backend.shared.exceptions.EntidadeNaoEncontradaException;
 import com.dam.backend.usuarios.infra.controllers.dto.response.UsuarioResponseDTO;
 import com.dam.backend.usuarios.infra.mappers.UsuarioMapper;
 import com.dam.backend.usuarios.infra.repositories.UsuarioRepository;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,7 @@ public class BuscarUsuarioUseCase {
 
     private final UsuarioRepository usuarioRepository;
 
+    @Lazy
     public BuscarUsuarioUseCase(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }

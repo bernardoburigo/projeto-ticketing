@@ -1,4 +1,4 @@
-package com.dam.backend.eventos.application.usecases;
+package com.dam.backend.eventos.application.services;
 
 import com.dam.backend.entities.CategoriaEventoEntity;
 import com.dam.backend.entities.EventosEntity;
@@ -15,12 +15,16 @@ import com.dam.backend.shared.enums.StatusEventoEnum;
 import com.dam.backend.shared.exceptions.EntidadeNaoEncontradaException;
 import com.dam.backend.shared.exceptions.ModelException;
 import com.dam.backend.shared.utils.ConstraintsUtil;
+import com.dam.backend.shared.utils.PaginationUtil;
+import com.dam.backend.shared.utils.dto.PaginarDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CriarEventoUseCase {
+public class EventoService {
 
     private final EventoRepository eventoRepository;
     private final LocaisEventosRepositoryGateway locaisEventosRepositoryGateway;
@@ -28,10 +32,10 @@ public class CriarEventoUseCase {
     private final CategoriaEventoRepository categoriaEventoRepository;
 
     @Lazy
-    public CriarEventoUseCase(EventoRepository eventoRepository,
-                              LocaisEventosRepositoryGateway locaisEventosRepositoryGateway,
-                              UsuarioRepositoryGateway usuarioRepositoryGateway,
-                              CategoriaEventoRepository categoriaEventoRepository) {
+    public EventoService(EventoRepository eventoRepository,
+                               LocaisEventosRepositoryGateway locaisEventosRepositoryGateway,
+                               UsuarioRepositoryGateway usuarioRepositoryGateway,
+                               CategoriaEventoRepository categoriaEventoRepository) {
         this.eventoRepository = eventoRepository;
         this.locaisEventosRepositoryGateway = locaisEventosRepositoryGateway;
         this.usuarioRepositoryGateway = usuarioRepositoryGateway;
@@ -49,6 +53,33 @@ public class CriarEventoUseCase {
         return EventoMapper.toDTO(evento, localEvento, categoriaEvento, usuarioEvento);
     }
 
+    public EventoResponseDTO buscar(Integer id) {
+        EventosEntity evento = buscarEvento(id);
+        LocalEventoEntity localEvento = buscarLocaisEventos(evento.getLocalEvento().getId());
+        CategoriaEventoEntity categoria = buscarCategoriaEvento(evento.getCategoria().getId());
+        UsuarioEntity organizador = buscarUsuarioEvento(evento.getOrganizador().getId());
+
+        return EventoMapper.toDTO(evento, localEvento, categoria, organizador);
+    }
+
+    public Page<EventoResponseDTO> paginar(PaginarDTO dto) {
+        PageRequest pageRequest = PaginationUtil.paginar(dto);
+
+        Page<EventosEntity> eventos = eventoRepository.paginarPorAtivo(dto.search(), pageRequest);
+
+        if (eventos.isEmpty()) {
+            return  PaginationUtil.paginaVazia(pageRequest);
+        }
+
+        return eventos.map(evento -> {
+            LocalEventoEntity localEvento = buscarLocaisEventos(evento.getLocalEvento().getId());
+            CategoriaEventoEntity categoria = buscarCategoriaEvento(evento.getCategoria().getId());
+            UsuarioEntity organizador = buscarUsuarioEvento(evento.getOrganizador().getId());
+
+            return EventoMapper.toDTO(evento, localEvento, categoria, organizador);
+        });
+    }
+
     private void validarResposta(EventoRequestDTO dto) {
         if (StringUtils.isBlank(dto.nome())) {
             throw new ModelException("Nome não pode ser nulo ou vazio");
@@ -61,6 +92,11 @@ public class CriarEventoUseCase {
         ConstraintsUtil.requireNonNull(dto.organizador(), "Organizador do evento não poder ser nulo");
     }
 
+    private EventosEntity buscarEvento(Integer id) {
+        return eventoRepository.findById(id)
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Local de evento não encontrado."));
+    }
+
     private LocalEventoEntity buscarLocaisEventos(Integer id) {
         return locaisEventosRepositoryGateway.findById(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException("Local de evento não encontrado."));
@@ -68,12 +104,12 @@ public class CriarEventoUseCase {
 
     private CategoriaEventoEntity buscarCategoriaEvento(Integer id) {
         return categoriaEventoRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("categoria do evento não encontrado."));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Categoria do evento não encontrado."));
     }
 
     private UsuarioEntity buscarUsuarioEvento(Integer id) {
         UsuarioEntity usuario = usuarioRepositoryGateway.findById(id)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("categoria do evento não encontrado."));
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Usuário do evento não encontrado."));
 
         validarOrganizador(usuario);
         return usuario;
