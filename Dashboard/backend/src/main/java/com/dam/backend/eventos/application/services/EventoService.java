@@ -16,7 +16,10 @@ import com.dam.backend.shared.exceptions.EntidadeNaoEncontradaException;
 import com.dam.backend.shared.exceptions.ModelException;
 import com.dam.backend.shared.utils.ConstraintsUtil;
 import com.dam.backend.shared.utils.PaginationUtil;
+import com.dam.backend.shared.utils.dto.BooleanRequestDTO;
+import com.dam.backend.shared.utils.dto.MensagemSistema;
 import com.dam.backend.shared.utils.dto.PaginarDTO;
+import java.util.Optional;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -52,8 +55,36 @@ public class EventoService {
         CategoriaEventoEntity categoriaEvento = buscarCategoriaEvento(dto.categoria());
         UsuarioEntity usuarioEvento = buscarUsuarioEvento(dto.organizador());
         EventosEntity evento = buildEvento(dto, localEvento, categoriaEvento, usuarioEvento, file);
+        Integer statusEvento = EventoMapper.statusEvento(evento);
+
+        evento.setStatus(statusEvento);
+        eventoRepository.save(evento);
 
         return EventoMapper.toDTO(evento, localEvento, categoriaEvento, usuarioEvento);
+    }
+
+    public EventoResponseDTO editar(Integer id, EventoRequestDTO dto, MultipartFile file) {
+
+        EventosEntity evento = buscarEvento(id);
+        LocalEventoEntity localEvento = buscarLocaisEventos(dto.localEvento());
+        CategoriaEventoEntity categoriaEvento = buscarCategoriaEvento(dto.categoria());
+        UsuarioEntity organizadorEvento = buscarUsuarioEvento(dto.organizador());
+        Integer statusEvento = EventoMapper.statusEvento(evento);
+
+        String imagemNome = imagemService.editarImagem(evento.getImagemNome(), file);
+
+        evento.setNome(dto.nome());
+        evento.setDescricao(dto.descricao());
+        evento.setDataInicio(dto.dataInicio());
+        evento.setDataFinal(dto.dataFinal());
+        evento.setLocalEvento(localEvento);
+        evento.setCategoria(categoriaEvento);
+        evento.setOrganizador(organizadorEvento);
+        evento.setStatus(statusEvento);
+        evento.setImagemNome(imagemNome);
+        eventoRepository.save(evento);
+
+        return EventoMapper.toDTO(evento, localEvento, categoriaEvento, organizadorEvento);
     }
 
     public EventoResponseDTO buscar(Integer id) {
@@ -83,6 +114,30 @@ public class EventoService {
         });
     }
 
+    public MensagemSistema deletar(Integer id) {
+        EventosEntity evento = buscarEvento(id);
+        imagemService.deletarImagem(evento.getImagemNome());
+
+        evento.setAtivo(false);
+        evento.setExcluido(true);
+        evento.setStatus(StatusEventoEnum.EXCLUIDO.getId());
+        eventoRepository.save(evento);
+
+        return new MensagemSistema("Evento removido com sucesso!");
+    }
+
+    public MensagemSistema cancelarEvento(Integer id, BooleanRequestDTO dto) {
+        EventosEntity evento = buscarEvento(id);
+
+        ConstraintsUtil.requireNonNull(evento.isAtivo() || dto.value(), "Status não pode estar nulo para inativar");
+
+        evento.setAtivo(dto.value());
+        evento.setStatus(StatusEventoEnum.CANCELADO.getId());
+        eventoRepository.save(evento);
+
+        return new MensagemSistema("Evento cancelado com sucesso!");
+    }
+
     private void validarResposta(EventoRequestDTO dto) {
         if (org.apache.commons.lang3.StringUtils.isBlank(dto.nome())) {
             throw new ModelException("Nome não pode ser nulo ou vazio");
@@ -96,8 +151,8 @@ public class EventoService {
     }
 
     private EventosEntity buscarEvento(Integer id) {
-        return eventoRepository.findById(id)
-                .orElseThrow(() -> new EntidadeNaoEncontradaException("Local de evento não encontrado."));
+        return Optional.ofNullable(eventoRepository.findByIdAndAtivo(id))
+                .orElseThrow(() -> new EntidadeNaoEncontradaException("Evento não encontrado."));
     }
 
     private LocalEventoEntity buscarLocaisEventos(Integer id) {
@@ -144,8 +199,8 @@ public class EventoService {
         evento.setLocalEvento(localEvento);
         evento.setCategoria(categoriaEvento);
         evento.setOrganizador(organizadorEvento);
-        evento.setStatus(StatusEventoEnum.ATIVO.getId());
         evento.setImagemNome(nameImage);
-        return eventoRepository.save(evento);
+
+        return evento;
     }
 }
