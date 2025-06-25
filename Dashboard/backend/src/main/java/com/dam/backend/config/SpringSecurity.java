@@ -36,7 +36,8 @@ public class SpringSecurity {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         String[] rotasPublicas = {
-                "/usuarios/login"
+                "/usuarios/login",
+                "/usuarios/cadastrar"
         };
 
         http
