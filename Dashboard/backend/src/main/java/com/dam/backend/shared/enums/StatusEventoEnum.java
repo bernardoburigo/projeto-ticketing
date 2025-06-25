@@ -11,7 +11,9 @@ public enum StatusEventoEnum {
 
     ATIVO(1, "Ativo"),
     ENCERRADO(2, "Encerrado"),
-    CANCELADO(3, "Cancelado");
+    CANCELADO(3, "Cancelado"),
+    FUTURO(4, "Futuro"),
+    EXCLUIDO(5, "Excluido");
 
     private final Integer id;
     private final String status;
