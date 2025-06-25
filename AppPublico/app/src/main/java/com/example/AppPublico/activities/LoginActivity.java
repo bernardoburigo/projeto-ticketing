@@ -51,8 +51,9 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         String token = response.body().getToken();
+                        String nome = response.body().getNome();
 
-                        salvarLogin(token, false); // ajuste conforme resposta futura p/ tipo de usuário
+                        salvarLogin(token, false, nome); // ajuste conforme resposta futura p/ tipo de usuário
                         redirecionarParaUsuario();
                     } else {
                         Toast.makeText(LoginActivity.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
@@ -72,12 +73,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void salvarLogin(String token, boolean isSeguranca) {
+    private void salvarLogin(String token, boolean isSeguranca, String nome) {
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("isLoggedIn", true);
         editor.putBoolean("isSeguranca", isSeguranca);
         editor.putString("jwtToken", token); // armazenando token JWT
+        editor.putString("userName", nome);
         editor.apply();
     }
 
