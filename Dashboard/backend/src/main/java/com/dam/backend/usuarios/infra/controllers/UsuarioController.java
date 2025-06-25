@@ -63,7 +63,6 @@ public class UsuarioController {
         return loginUseCase.login(dto);
     }
 
-    @WithPermissoes({Permissoes.ADMIN})
     @Transactional
     @PostMapping("/cadastrar")
     public ResponseEntity<UsuarioCadastradoResponseDTO> cadastrarUsuario(@RequestBody UsuarioRequestDTO dto) {
