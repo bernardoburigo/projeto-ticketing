@@ -6,6 +6,7 @@ import com.dam.backend.usuarios.infra.controllers.dto.request.LoginRequestDTO;
 import com.dam.backend.usuarios.infra.controllers.dto.response.LoginResponseDTO;
 import com.dam.backend.usuarios.infra.controllers.exceptions.LoginIncorretoException;
 import com.dam.backend.usuarios.infra.repositories.UsuarioRepository;
+import com.dam.backend.entities.UsuarioEntity;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -73,6 +74,6 @@ public class LoginUseCase {
 
         String jwtValue = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
-        return new LoginResponseDTO(jwtValue, expiresInToken);
+        return new LoginResponseDTO(jwtValue, expiresInToken, usuario.getNome());
     }
 }
