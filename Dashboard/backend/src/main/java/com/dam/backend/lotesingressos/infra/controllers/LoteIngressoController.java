@@ -2,6 +2,7 @@ package com.dam.backend.lotesingressos.infra.controllers;
 
 import com.dam.backend.config.WithPermissoes;
 import com.dam.backend.lotesingressos.application.services.LoteIngressoService;
+import com.dam.backend.lotesingressos.application.usecases.BuscarLoteIngressoPorEventoUseCase;
 import com.dam.backend.lotesingressos.application.usecases.BuscarLotesIngressoPorEventoAndTipoIngressoUseCase;
 import com.dam.backend.lotesingressos.application.usecases.BuscarLotesIngressosUseCase;
 import com.dam.backend.lotesingressos.application.usecases.IndisponibilizarLoteIngressoUseCase;
@@ -33,17 +34,20 @@ public class LoteIngressoController {
     private final BuscarLotesIngressoPorEventoAndTipoIngressoUseCase buscarLotesIngressoPorEventoAndTipoIngressoUseCase;
     private final BuscarLotesIngressosUseCase buscarLotesIngressosUseCase;
     private final IndisponibilizarLoteIngressoUseCase indisponibilizarLoteIngressoUseCase;
+    private final BuscarLoteIngressoPorEventoUseCase buscarLoteIngressoPorEventoUseCase;
 
     public LoteIngressoController(LoteIngressoService loteIngressoService,
                                   PaginarLoteIngressoUseCase paginarLoteIngressoUseCase,
                                   BuscarLotesIngressoPorEventoAndTipoIngressoUseCase buscarLotesIngressoPorEventoAndTipoIngressoUseCase,
                                   BuscarLotesIngressosUseCase buscarLotesIngressosUseCase,
-                                  IndisponibilizarLoteIngressoUseCase indisponibilizarLoteIngressoUseCase) {
+                                  IndisponibilizarLoteIngressoUseCase indisponibilizarLoteIngressoUseCase,
+                                  BuscarLoteIngressoPorEventoUseCase buscarLoteIngressoPorEventoUseCase) {
         this.loteIngressoService = loteIngressoService;
         this.paginarLoteIngressoUseCase = paginarLoteIngressoUseCase;
         this.buscarLotesIngressoPorEventoAndTipoIngressoUseCase = buscarLotesIngressoPorEventoAndTipoIngressoUseCase;
         this.buscarLotesIngressosUseCase = buscarLotesIngressosUseCase;
         this.indisponibilizarLoteIngressoUseCase = indisponibilizarLoteIngressoUseCase;
+        this.buscarLoteIngressoPorEventoUseCase = buscarLoteIngressoPorEventoUseCase;
     }
 
     @WithPermissoes({Permissoes.ORGANIZADOR})
@@ -84,5 +88,11 @@ public class LoteIngressoController {
     @DeleteMapping("indisponibilizar/{id}")
     public ResponseEntity<MensagemSistema> indisponibilizarLote(@PathVariable Integer id) {
         return ResponseEntity.ok(indisponibilizarLoteIngressoUseCase.indisponibilizar(id));
+    }
+
+    @WithPermissoes({Permissoes.ORGANIZADOR})
+    @GetMapping("/evento/{idEvento}")
+    public ResponseEntity<PaginarOrBuscarLoteIngressoResponseDTO> buscarPorEvento(@PathVariable Integer idEvento) {
+        return ResponseEntity.ok(buscarLoteIngressoPorEventoUseCase.buscar(idEvento));
     }
 }

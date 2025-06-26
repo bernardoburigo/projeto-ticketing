@@ -92,6 +92,19 @@ public class LoteIngressoService {
 //        loteIngresso.setNome();
 //    }
 
+    public void validarDisponibilidadeLote(LoteIngressoEntity lote, Integer quantidadeSolicitada) {
+        int disponivel = lote.getQuantidadeTotal() - lote.getQuantidadeVendida();
+
+        if (quantidadeSolicitada > disponivel) {
+            throw new ModelException("Quantidade solicitada possui mais que o disponivel.");
+        }
+    }
+
+    public void atualizarQuantidadeVendida(LoteIngressoEntity lote, Integer quantidadeSolicitada) {
+        lote.setQuantidadeVendida(lote.getQuantidadeVendida() + quantidadeSolicitada);
+        loteIngressoRepository.save(lote);
+    }
+
     private void loteIndisponivel(boolean ativo, boolean excluido) {
         if (!ativo || excluido) {
             throw new ModelException("Não pode editar um lote indisponivel");
