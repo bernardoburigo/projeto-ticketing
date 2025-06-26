@@ -2,10 +2,12 @@ package com.dam.backend.vendas.application.usecases;
 
 import com.dam.backend.entities.EventosEntity;
 import com.dam.backend.entities.LoteIngressoEntity;
+import com.dam.backend.entities.ParticipanteEntity;
 import com.dam.backend.entities.UsuarioEntity;
 import com.dam.backend.entities.VendaEntity;
 import com.dam.backend.entities.VendaItemEntity;
 import com.dam.backend.lotesingressos.application.services.LoteIngressoService;
+import com.dam.backend.participantes.infra.repositories.ParticipanteRepository;
 import com.dam.backend.shared.exceptions.EntidadeNaoEncontradaException;
 import com.dam.backend.shared.utils.dto.MensagemSistema;
 import com.dam.backend.vendas.application.gateways.EventoRepositoryGatewayVendas;
@@ -18,6 +20,7 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +31,7 @@ public class VendaEventoUseCase {
     private final VendaRepository vendaRepository;
     private final UsuarioRepositoryGatewayVendas usuarioRepositoryGatewayVendas;
     private final LoteIngressoRepositoryGateway loteIngressoRepositoryGateway;
+    private final ParticipanteRepository participanteRepository;
     private final LoteIngressoService loteIngressoService;
 
     @Lazy
@@ -35,11 +39,13 @@ public class VendaEventoUseCase {
                               VendaRepository vendaRepository,
                               UsuarioRepositoryGatewayVendas usuarioRepositoryGatewayVendas,
                               LoteIngressoRepositoryGateway loteIngressoRepositoryGateway,
+                              ParticipanteRepository participanteRepository,
                               LoteIngressoService loteIngressoService) {
         this.eventoRepositoryGatewayVendas = eventoRepositoryGatewayVendas;
         this.vendaRepository = vendaRepository;
         this.usuarioRepositoryGatewayVendas = usuarioRepositoryGatewayVendas;
         this.loteIngressoRepositoryGateway = loteIngressoRepositoryGateway;
+        this.participanteRepository = participanteRepository;
         this.loteIngressoService = loteIngressoService;
     }
 
@@ -75,6 +81,8 @@ public class VendaEventoUseCase {
         buildVendaItem(venda, dto);
 
         vendaRepository.save(venda);
+
+        criarParticipantes(venda, usuario);
     }
 
     private void buildVendaItem(VendaEntity venda, VendaRequestDTO dto) {
@@ -100,5 +108,19 @@ public class VendaEventoUseCase {
 
         venda.setVendaItens(itens);
         venda.setValorTotal(valorTotal);
+    }
+
+    private void criarParticipantes(VendaEntity venda, UsuarioEntity usuario) {
+        for (VendaItemEntity item : venda.getVendaItens()) {
+            for (int i = 0; i < item.getQuantidade(); i++) {
+                ParticipanteEntity participante = new ParticipanteEntity();
+                participante.setVendaItem(item);
+                participante.setCheckin(false);
+                participante.setUsuario(usuario);
+                participante.setIngressoQrCode(UUID.randomUUID().toString());
+
+                participanteRepository.save(participante);
+            }
+        }
     }
 }

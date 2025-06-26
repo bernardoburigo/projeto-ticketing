@@ -60,13 +60,7 @@ public class LoteIngressoController {
     @WithPermissoes({Permissoes.ORGANIZADOR})
     @GetMapping
     public ResponseEntity<Page<PaginarOrBuscarLoteIngressoResponseDTO>> paginarLoteIngresso(@ModelAttribute PaginarDTO dto) {
-        PaginarDTO params = PaginarDTO.valueDefaults(
-                dto.page(),
-                dto.size(),
-                dto.orderby(),
-                dto.direction(),
-                dto.search()
-        );
+        PaginarDTO params = PaginarDTO.valueDefaults(dto);
 
         return ResponseEntity.ok(paginarLoteIngressoUseCase.paginar(params));
     }
