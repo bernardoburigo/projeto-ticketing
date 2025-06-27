@@ -31,14 +31,14 @@ public class DetalhesEventoActivity extends AppCompatActivity {
 
         if (evento != null) {
             tvTitulo.setText(evento.getNome());
-            tvLocal.setText(evento.getLocal());
-            tvDataHora.setText(evento.getData() + " às " + evento.getHora());
-            tvArtistas.setText(evento.getArtistas());
-            imgEvento.setImageResource(evento.getImagemResId());
+            //tvLocal.setText(evento.getLocal());
+            //tvDataHora.setText(evento.getData() + " às " + evento.getHora());
+            //tvArtistas.setText(evento.getArtistas());
+            //imgEvento.setImageResource(evento.getImagemResId());
 
             btnComprar.setOnClickListener(v -> {
                 Intent intent = new Intent(this, CompraIngressoActivity.class);
-                intent.putExtra("evento", evento);
+                //intent.putExtra("evento", evento);
                 startActivity(intent);
             });
         }

@@ -1,29 +1,13 @@
 package com.example.AppPublico.models;
 
-import java.util.List;
-
 public class CategoriaEvento {
+    private int id;
     private String nome;
-    private List<Evento> eventos;
 
-    public CategoriaEvento(String nome, List<Evento> eventos) {
-        this.nome = nome;
-        this.eventos = eventos;
-    }
+    // Getters e Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public List<Evento> getEventos() {
-        return eventos;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setEventos(List<Evento> eventos) {
-        this.eventos = eventos;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 }

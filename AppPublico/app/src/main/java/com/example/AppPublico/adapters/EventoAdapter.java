@@ -30,7 +30,8 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.EventoView
     @NonNull
     @Override
     public EventoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_evento_destaque, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_evento_destaque, parent, false);
         return new EventoViewHolder(view);
     }
 
@@ -38,8 +39,20 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.EventoView
     public void onBindViewHolder(@NonNull EventoViewHolder holder, int position) {
         Evento evento = lista.get(position);
         holder.nome.setText(evento.getNome());
-        holder.local.setText(evento.getLocal());
-        holder.artistas.setText(evento.getArtistas());
+        holder.descricao.setText(evento.getDescricao());
+
+        if (evento.getLocalEvento() != null) {
+            holder.local.setText(evento.getLocalEvento().getNome());
+        } else {
+            holder.local.setText("Local não informado");
+        }
+
+        if (evento.getCategoria() != null) {
+            holder.categoria.setText(evento.getCategoria().getNome());
+
+        } else {
+            holder.categoria.setText("Categoria não informada");
+        }
 
         holder.itemView.setOnClickListener(v -> listener.onEventoClick(evento));
     }
@@ -50,13 +63,14 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.EventoView
     }
 
     public static class EventoViewHolder extends RecyclerView.ViewHolder {
-        TextView nome, local, artistas;
+        TextView nome, descricao, local, categoria;
 
         public EventoViewHolder(@NonNull View itemView) {
             super(itemView);
             nome = itemView.findViewById(R.id.tvNomeEvento);
+            descricao = itemView.findViewById(R.id.tvDescricaoEvento);
             local = itemView.findViewById(R.id.tvLocalEvento);
-            artistas = itemView.findViewById(R.id.tvArtistasEvento);
+            categoria = itemView.findViewById(R.id.tvCategoriaEvento);
         }
     }
 }

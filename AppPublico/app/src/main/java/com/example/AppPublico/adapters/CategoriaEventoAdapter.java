@@ -12,18 +12,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.AppPublico.R;
 import com.example.AppPublico.models.CategoriaEvento;
+import com.example.AppPublico.models.Evento;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CategoriaEventoAdapter extends RecyclerView.Adapter<CategoriaEventoAdapter.CategoriaViewHolder> {
 
     private Context context;
     private List<CategoriaEvento> listaCategorias;
+    private Map<Integer, List<Evento>> eventosPorCategoria;
     private EventoAdapter.OnEventoClickListener listener;
 
-    public CategoriaEventoAdapter(Context context, List<CategoriaEvento> listaCategorias, EventoAdapter.OnEventoClickListener listener) {
+    public CategoriaEventoAdapter(Context context, List<CategoriaEvento> listaCategorias,
+                                  Map<Integer, List<Evento>> eventosPorCategoria,
+                                  EventoAdapter.OnEventoClickListener listener) {
         this.context = context;
         this.listaCategorias = listaCategorias;
+        this.eventosPorCategoria = eventosPorCategoria;
         this.listener = listener;
     }
 
@@ -39,7 +46,10 @@ public class CategoriaEventoAdapter extends RecyclerView.Adapter<CategoriaEvento
         CategoriaEvento categoria = listaCategorias.get(position);
         holder.nomeCategoria.setText(categoria.getNome());
 
-        EventoAdapter eventoAdapter = new EventoAdapter(categoria.getEventos(), listener);
+        // Busca os eventos associados à categoria pelo ID
+        List<Evento> eventos = eventosPorCategoria.getOrDefault(categoria.getId(), new ArrayList<>());
+
+        EventoAdapter eventoAdapter = new EventoAdapter(eventos, listener);
         holder.recyclerEventos.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         holder.recyclerEventos.setAdapter(eventoAdapter);
     }

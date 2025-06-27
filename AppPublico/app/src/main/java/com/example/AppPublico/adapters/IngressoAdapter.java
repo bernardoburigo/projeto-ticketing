@@ -62,9 +62,9 @@ public class IngressoAdapter extends RecyclerView.Adapter<IngressoAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Ingresso ingresso = lista.get(position);
         holder.textNomeEvento.setText(ingresso.getEvento().getNome());
-        holder.textDataEvento.setText(ingresso.getEvento().getData());
-        holder.textLocalEvento.setText(ingresso.getEvento().getLocal());
-        holder.textHoraEvento.setText(ingresso.getEvento().getHora());
+        //holder.textDataEvento.setText(ingresso.getEvento().getData());
+        //holder.textLocalEvento.setText(ingresso.getEvento().getLocal());
+        //holder.textHoraEvento.setText(ingresso.getEvento().getHora());
         holder.textValorPago.setText("R$ " + String.format("%.2f", ingresso.getValorPago()));
     }
 

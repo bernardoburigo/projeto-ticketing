@@ -1,49 +1,45 @@
 package com.example.AppPublico.models;
 
-import java.io.Serializable;
-
-public class Evento implements Serializable {
+public class Evento {
+    private Integer id;
     private String nome;
-    private String local;
-    private String data;
-    private String hora;
-    private int imagemResId;
-    private String artistas;
+    private String descricao;
+    private String dataInicio;
+    private String dataFinal;
+    private LocalEvento localEvento;
+    private CategoriaEvento categoria;
+    private OrganizadorEvento organizador;
+    private String statusEvento;
+    private String imagemNome;
 
-    public Evento(String nome, String local, String data, String hora, int imagemResId, String artistas) {
-        this.nome = nome;
-        this.local = local;
-        this.data = data;
-        this.hora = hora;
-        this.imagemResId = imagemResId;
-        this.artistas = artistas;
-    }
+    // Getters e setters
+    public Integer getId() { return id; }
+    public void setId(Integer id) { this.id = id; }
 
-    public String getNome() {
-        return nome;
-    }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public String getLocal() {
-        return local;
-    }
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 
-    public String getData() {
-        return data;
-    }
+    public String getDataInicio() { return dataInicio; }
+    public void setDataInicio(String dataInicio) { this.dataInicio = dataInicio; }
 
-    public String getHora() {
-        return hora;
-    }
+    public String getDataFinal() { return dataFinal; }
+    public void setDataFinal(String dataFinal) { this.dataFinal = dataFinal; }
 
-    public int getImagemResId() {
-        return imagemResId;
-    }
+    public LocalEvento getLocalEvento() { return localEvento; }
+    public void setLocalEvento(LocalEvento localEvento) { this.localEvento = localEvento; }
 
-    public String getArtistas() {
-        return artistas;
-    }
+    public CategoriaEvento getCategoria() { return categoria; }
+    public void setCategoria(CategoriaEvento categoria) { this.categoria = categoria; }
 
-    public String getTipo() { //GAMBIARRA!!! TROCAR QUANDO POSSÍVEL
-        String tipoIngresso = "";
-        return tipoIngresso; }
+    public OrganizadorEvento getOrganizador() { return organizador; }
+    public void setOrganizador(OrganizadorEvento organizador) { this.organizador = organizador; }
+
+    public String getStatusEvento() { return statusEvento; }
+    public void setStatusEvento(String statusEvento) { this.statusEvento = statusEvento; }
+
+    public String getImagemNome() { return imagemNome; }
+    public void setImagemNome(String imagemNome) { this.imagemNome = imagemNome; }
 }

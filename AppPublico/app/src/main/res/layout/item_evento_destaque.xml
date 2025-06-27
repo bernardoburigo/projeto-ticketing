@@ -12,31 +12,36 @@
         android:id="@+id/tvNomeEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome do Evento"
-        android:textSize="18sp"
+        android:text="Nome do evento"
         android:textStyle="bold"
-        android:textColor="#1A3B9F"
         android:fontFamily="@font/open_sans"
-        android:layout_marginTop="50sp" />
+        android:textColor="@color/azul_primario" />
+
+    <TextView
+        android:id="@+id/tvDescricaoEvento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descrição"
+        android:fontFamily="@font/open_sans"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp" />
 
     <TextView
         android:id="@+id/tvLocalEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Local do Evento"
-        android:textSize="14sp"
-        android:textColor="#555555"
+        android:text="Local"
         android:fontFamily="@font/open_sans"
+        android:textColor="@color/black"
         android:layout_marginTop="4dp" />
 
     <TextView
-        android:id="@+id/tvArtistasEvento"
+        android:id="@+id/tvCategoriaEvento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Artistas/Palestrantes"
-        android:textSize="14sp"
-        android:textColor="#555555"
+        android:text="Categoria"
         android:fontFamily="@font/open_sans"
+        android:textColor="@color/black"
         android:layout_marginTop="4dp" />
 
 </LinearLayout>

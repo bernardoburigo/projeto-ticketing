@@ -31,8 +31,8 @@ public class DetalhesIngressoActivity extends AppCompatActivity {
         Ingresso ingresso = (Ingresso) getIntent().getSerializableExtra(EXTRA_INGRESSO);
         if (ingresso != null) {
             tvNomeEvento.setText(ingresso.getEvento().getNome());
-            tvDetalhesEvento.setText(ingresso.getEvento().getLocal() + " - " + ingresso.getEvento().getData() + " às " + ingresso.getEvento().getHora());
-            tvTipoIngresso.setText("Tipo: " + ingresso.getEvento().getTipo());
+            //tvDetalhesEvento.setText(ingresso.getEvento().getLocal() + " - " + ingresso.getEvento().getData() + " às " + ingresso.getEvento().getHora());
+            //tvTipoIngresso.setText("Tipo: " + ingresso.getEvento().getTipo());
             tvValorPago.setText("Valor Pago: R$ " + ingresso.getValorPago());
             tvDataCompra.setText("Data da Compra: " + ingresso.getDataCompra());
             tvCodigoIngresso.setText("Código: " + ingresso.getIdIngresso());

@@ -42,7 +42,7 @@ public class CompraIngressoActivity extends AppCompatActivity {
         Button btnComprar = findViewById(R.id.btnConfirmarCompra);
 
         if (evento != null) {
-            tvResumo.setText(evento.getNome() + "\n" + evento.getData() + " às " + evento.getHora());
+            //tvResumo.setText(evento.getNome() + "\n" + evento.getData() + " às " + evento.getHora());
         }
 
         // Tipos de ingresso
