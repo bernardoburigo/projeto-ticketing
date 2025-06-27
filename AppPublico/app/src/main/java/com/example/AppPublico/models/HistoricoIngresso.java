@@ -16,7 +16,6 @@ public class HistoricoIngresso {
         this.valorPago = valorPago;
     }
 
-    // Getters
     public String getNomeEvento() {
         return nomeEvento;
     }
@@ -37,7 +36,6 @@ public class HistoricoIngresso {
         return valorPago;
     }
 
-    // Setters
     public void setNomeEvento(String nomeEvento) {
         this.nomeEvento = nomeEvento;
     }

@@ -14,7 +14,6 @@ public class Evento implements Serializable {
     private String statusEvento;
     private String imagemNome;
 
-    // Getters e setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 

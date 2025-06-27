@@ -81,7 +81,7 @@ public class VerificacaoIngressoActivity extends AppCompatActivity {
     }
 
     private void mostrarDetalhesSimulados(String qrCode, boolean jaValidado) {
-        // Mock com base no QRCode (ideal: consultar banco futuramente)
+        // Mock com base no QRCode (SUBSTITUIR POR LÓGICA)
         String nomeEvento = "Evento Desconhecido";
         String local = "Local não identificado";
         String data = "Data não disponível";

@@ -13,5 +13,4 @@ public class UsuarioRequest {
         this.role = null;
     }
 
-    // Getters e Setters (se necessário)
 }

@@ -130,9 +130,7 @@ public class CompraIngressoActivity extends AppCompatActivity {
                 } else {
                     try {
                         String errorBody = response.errorBody().string();
-                        // Loga o erro no Logcat com tag personalizada
                         Log.e("CompraIngresso", "Erro na compra: " + errorBody);
-                        // Também pode mostrar o Toast resumido, se quiser
                         Toast.makeText(CompraIngressoActivity.this, "Erro na compra! Veja log.", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         Log.e("CompraIngresso", "Erro ao ler mensagem de erro do servidor", e);

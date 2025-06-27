@@ -70,19 +70,19 @@ public class CriarContaActivity extends AppCompatActivity {
                         String errorBodyString = "";
                         try {
                             if (response.errorBody() != null) {
-                                errorBodyString = response.errorBody().string(); // Cuidado: errorBody().string() só pode ser chamado uma vez
+                                errorBodyString = response.errorBody().string();
                             }
                         } catch (IOException e) {
                             androidx.media3.common.util.Log.e("CriarContaActivity", "Erro ao ler errorBody", e);
                         }
                         androidx.media3.common.util.Log.e("CriarContaActivity", "Erro na API: Código: " + response.code() + " Mensagem: " + response.message() + " Corpo: " + errorBodyString);
-                        Toast.makeText(CriarContaActivity.this, "Erro ao criar conta. Código: " + response.code(), Toast.LENGTH_LONG).show(); // Mostre o código de erro no Toast
+                        Toast.makeText(CriarContaActivity.this, "Erro ao criar conta. Código: " + response.code(), Toast.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    androidx.media3.common.util.Log.e("CriarContaActivity", "Falha na conexão: ", t); // Log completo da exceção
+                    androidx.media3.common.util.Log.e("CriarContaActivity", "Falha na conexão: ", t);
                     Toast.makeText(CriarContaActivity.this, "Erro na conexão: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 }
             });

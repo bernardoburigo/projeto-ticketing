@@ -46,7 +46,6 @@ public class CategoriaEventoAdapter extends RecyclerView.Adapter<CategoriaEvento
         CategoriaEvento categoria = listaCategorias.get(position);
         holder.nomeCategoria.setText(categoria.getNome());
 
-        // Busca os eventos associados à categoria pelo ID
         List<Evento> eventos = eventosPorCategoria.getOrDefault(categoria.getId(), new ArrayList<>());
 
         EventoAdapter eventoAdapter = new EventoAdapter(eventos, listener);

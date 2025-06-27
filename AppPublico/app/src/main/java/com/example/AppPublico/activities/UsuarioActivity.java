@@ -32,7 +32,6 @@ public class UsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario);
 
-        // Inicializar Views
         tvBoasVindas = findViewById(R.id.tvBoasVindas);
         btnHistorico = findViewById(R.id.btnHistorico);
         btnLogin = findViewById(R.id.btnLogin);

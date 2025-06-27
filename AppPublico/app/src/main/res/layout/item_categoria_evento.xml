@@ -6,7 +6,6 @@
     android:padding="16dp"
     android:background="@android:color/white">
 
-    <!-- Nome da Categoria -->
     <TextView
         android:id="@+id/tvNomeCategoria"
         android:layout_width="match_parent"
@@ -19,7 +18,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginTop="50dp"/>
 
-    <!-- Lista horizontal de eventos dessa categoria -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvEventosDaCategoria"
         android:layout_width="match_parent"

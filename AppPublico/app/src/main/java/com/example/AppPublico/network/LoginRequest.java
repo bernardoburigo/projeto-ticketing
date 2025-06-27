@@ -9,7 +9,6 @@ public class LoginRequest {
         this.senha = senha;
     }
 
-    // Getters
     public String getEmail() { return email; }
     public String getSenha() { return senha; }
 }

@@ -27,13 +27,10 @@ public class SincronizadorIngressos {
             return;
         }
 
-        // MOCK: simula envio ao backend
         for (String codigo : ingressos) {
-            // Futuramente: enviar para o servidor
             System.out.println("Sincronizando ingresso: " + codigo);
         }
 
-        // Após "sucesso"
         prefs.edit().putStringSet("validados", new HashSet<>()).apply();
         Toast.makeText(context, "Ingressos sincronizados com sucesso!", Toast.LENGTH_SHORT).show();
     }

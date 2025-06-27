@@ -34,7 +34,6 @@
             android:fontFamily="@font/open_sans"
             android:textStyle="bold" />
 
-        <!-- Detalhes do ingresso -->
         <TextView
             android:id="@+id/tvNomeEvento"
             android:layout_width="match_parent"
