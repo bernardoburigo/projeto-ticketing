@@ -1,7 +1,9 @@
 package com.example.AppPublico.activities;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,33 +11,54 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.AppPublico.R;
 import com.example.AppPublico.adapters.IngressoAdapter;
-import com.example.AppPublico.models.Evento;
-import com.example.AppPublico.models.Ingresso;
+import com.example.AppPublico.models.QrCodeResponseDTO;
+import com.example.AppPublico.network.ApiService;
+import com.example.AppPublico.services.RetrofitClient;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MeusIngressosActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private IngressoAdapter adapter;
-    private List<Ingresso> listaMock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meus_ingressos);
 
-        recyclerView = findViewById(R.id.recyclerViewIngressos);
+        recyclerView = findViewById(R.id.recyclerIngressos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        int idUsuario = prefs.getInt("idUsuario", -1);
 
-        adapter = new IngressoAdapter(listaMock, ingresso -> {
-            Intent intent = new Intent(MeusIngressosActivity.this, DetalhesIngressoActivity.class);
-            intent.putExtra("ingresso", ingresso);
-            startActivity(intent);
+        if (idUsuario == -1) {
+            Toast.makeText(this, "Usuário não identificado", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ApiService api = RetrofitClient.getApiService();
+        api.getIngressosPorUsuario(idUsuario, 0, 50).enqueue(new Callback<>() {
+            @Override
+            public void onResponse(Call<List<QrCodeResponseDTO>> call, Response<List<QrCodeResponseDTO>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    adapter = new IngressoAdapter(response.body(), MeusIngressosActivity.this);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Toast.makeText(MeusIngressosActivity.this, "Erro ao carregar ingressos", Toast.LENGTH_SHORT).show();
+                    Log.e("MeusIngressos", "Erro: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<QrCodeResponseDTO>> call, Throwable t) {
+                Toast.makeText(MeusIngressosActivity.this, "Erro de rede: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
-
-        recyclerView.setAdapter(adapter);
     }
 }

@@ -1,71 +1,66 @@
 package com.example.AppPublico.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.AppPublico.R;
-import com.example.AppPublico.activities.DetalhesIngressoActivity;
-import com.example.AppPublico.models.Ingresso;
+import com.example.AppPublico.models.QrCodeResponseDTO;
+import com.example.AppPublico.utils.QRCodeGenerator;
 
 import java.util.List;
 
 public class IngressoAdapter extends RecyclerView.Adapter<IngressoAdapter.ViewHolder> {
 
-    public interface OnIngressoClickListener {
-        void onClick(Ingresso ingresso);
-    }
+    private final List<QrCodeResponseDTO> lista;
+    private final Context context;
 
-    private List<Ingresso> lista;
-    private OnIngressoClickListener listener;
-
-    public IngressoAdapter(List<Ingresso> lista, OnIngressoClickListener listener) {
+    public IngressoAdapter(List<QrCodeResponseDTO> lista, Context context) {
         this.lista = lista;
-        this.listener = listener;
+        this.context = context;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textNomeEvento, textDataEvento, textLocalEvento, textHoraEvento, textValorPago;
+        TextView tvNome, tvDocumento, tvStatus;
 
-        public ViewHolder(View itemView, OnIngressoClickListener listener, List<Ingresso> lista) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            textNomeEvento = itemView.findViewById(R.id.textNomeEvento);
-            textDataEvento = itemView.findViewById(R.id.textDataEvento);
-            textLocalEvento = itemView.findViewById(R.id.textLocalEvento);
-            textHoraEvento = itemView.findViewById(R.id.textHoraEvento);
-            textValorPago = itemView.findViewById(R.id.textValorPago);
-
-            itemView.setOnClickListener(v -> {
-                int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION && listener != null) {
-                    listener.onClick(lista.get(position));
-                }
-            });
+            tvNome = itemView.findViewById(R.id.tvNomeParticipante);
+            tvDocumento = itemView.findViewById(R.id.tvDocumentoParticipante);
+            tvStatus = itemView.findViewById(R.id.tvStatusCheckin);
         }
     }
 
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_historico_ingresso, parent, false);
-        return new ViewHolder(view, listener, lista);
+    public IngressoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(context).inflate(R.layout.item_ingresso, parent, false);
+        return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Ingresso ingresso = lista.get(position);
-        holder.textNomeEvento.setText(ingresso.getEvento().getNome());
-        //holder.textDataEvento.setText(ingresso.getEvento().getData());
-        //holder.textLocalEvento.setText(ingresso.getEvento().getLocal());
-        //holder.textHoraEvento.setText(ingresso.getEvento().getHora());
-        holder.textValorPago.setText("R$ " + String.format("%.2f", ingresso.getValorPago()));
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        QrCodeResponseDTO ingresso = lista.get(position);
+
+        holder.tvNome.setText(ingresso.getNome());
+        holder.tvDocumento.setText("Documento: " + ingresso.getDocumento());
+        holder.tvStatus.setText(ingresso.isCheckin() ? "Check-in: Realizado" : "Check-in: Pendente");
+
+        holder.itemView.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setTitle("Ingresso QR Code");
+
+            // Gera o QRCode
+            String qrCode = ingresso.getIngressoQrCode();
+            android.widget.ImageView imageView = new android.widget.ImageView(context);
+            imageView.setImageBitmap(QRCodeGenerator.generateQRCode(qrCode));
+            builder.setView(imageView);
+            builder.setPositiveButton("Fechar", null);
+            builder.show();
+        });
     }
 
     @Override

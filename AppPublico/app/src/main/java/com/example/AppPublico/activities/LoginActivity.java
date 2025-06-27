@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtSenha;
     private Button btnLogin;
     private boolean doubleBackToExitPressedOnce = false;
+
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +57,26 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         String token = response.body().getToken();
                         String nome = response.body().getNome();
+                        Integer idUsuario = response.body().getIdUsuario();
 
-                        salvarLogin(token, false, nome); // ajuste conforme resposta futura p/ tipo de usuário
+                        if (idUsuario == null) {
+                            Log.e(TAG, "Erro: idUsuario veio null da API!");
+                            Toast.makeText(LoginActivity.this, "Erro ao recuperar ID do usuário. Tente novamente.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        Log.d(TAG, "Login bem-sucedido. ID: " + idUsuario + ", Nome: " + nome);
+                        salvarLogin(token, false, nome, idUsuario);
                         redirecionarParaUsuario();
                     } else {
+                        Log.e(TAG, "Login falhou. Código: " + response.code());
                         Toast.makeText(LoginActivity.this, "Credenciais inválidas", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    Log.e(TAG, "Erro na conexão: " + t.getMessage(), t);
                     Toast.makeText(LoginActivity.this, "Erro na conexão: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -75,13 +88,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void salvarLogin(String token, boolean isSeguranca, String nome) {
+    private void salvarLogin(String token, boolean isSeguranca, String nome, Integer idUsuario) {
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("isLoggedIn", true);
         editor.putBoolean("isSeguranca", isSeguranca);
-        editor.putString("jwtToken", token); // armazenando token JWT
+        editor.putString("jwtToken", token);
         editor.putString("userName", nome);
+        editor.putInt("idUsuario", idUsuario);
         editor.apply();
     }
 

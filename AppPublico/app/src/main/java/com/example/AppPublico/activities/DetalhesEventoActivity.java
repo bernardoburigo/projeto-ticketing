@@ -61,15 +61,12 @@ public class DetalhesEventoActivity extends AppCompatActivity {
             }
 
             if (evento.getImagemNome() != null) {
-                // Obtenha seu token de autenticação (ex: das SharedPreferences)
                 SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
                 String token = prefs.getString("jwtToken", null);
 
                 if (token == null) {
                     Log.e("GlideAuth", "Token não encontrado para carregar imagem.");
-                    // Trate o caso de token nulo, talvez exibindo uma imagem de placeholder
-                    // ou notificando o usuário.
-                    imgEvento.setImageResource(android.R.drawable.ic_dialog_alert); // Exemplo
+                    imgEvento.setImageResource(android.R.drawable.ic_dialog_alert);
                 } else {
                     String imageUrl = "http://172.22.20.22:8080/eventos/imagens/" + evento.getImagemNome();
 
@@ -78,7 +75,7 @@ public class DetalhesEventoActivity extends AppCompatActivity {
                             .build());
 
                     Glide.with(this)
-                            .load(glideUrl) // Carrega a GlideUrl com o cabeçalho
+                            .load(glideUrl)
                             .error(android.R.drawable.ic_dialog_alert)
                             .listener(new com.bumptech.glide.request.RequestListener<android.graphics.drawable.Drawable>() {
                                 @Override
@@ -104,7 +101,7 @@ public class DetalhesEventoActivity extends AppCompatActivity {
                             .into(imgEvento);
                 }
             } else {
-                imgEvento.setImageResource(android.R.drawable.ic_dialog_alert); // Se não houver nome de imagem
+                imgEvento.setImageResource(android.R.drawable.ic_dialog_alert);
             }
 
             btnComprar.setOnClickListener(v -> {
