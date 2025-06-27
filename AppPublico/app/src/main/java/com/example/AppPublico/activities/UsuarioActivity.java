@@ -101,6 +101,8 @@ public class UsuarioActivity extends AppCompatActivity {
 
                             carregarDadosEAtualizarUI();
                             Toast.makeText(UsuarioActivity.this, "Você saiu da conta.", Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(UsuarioActivity.this, LoginActivity.class));
                         }
                     })
                     .setNegativeButton("Não", null)
