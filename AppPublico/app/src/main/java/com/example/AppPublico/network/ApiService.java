@@ -1,11 +1,15 @@
 package com.example.AppPublico.network;
 
+import com.example.AppPublico.models.CategoriaEvento;
+import com.example.AppPublico.models.Evento;
 import com.example.AppPublico.models.MensagemSistema;
 import com.example.AppPublico.models.PageResponse;
 import com.example.AppPublico.models.PaginarOrBuscarLoteIngressoResponseDTO;
 import com.example.AppPublico.models.QrCodeResponseDTO;
 import com.example.AppPublico.models.UsuarioRequest;
 import com.example.AppPublico.models.VendaRequest;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -36,5 +40,12 @@ public interface ApiService {
             @Query("pagina") int pagina,
             @Query("quantidade") int quantidade
     );
+
+    @GET("/eventos")
+    Call<List<Evento>> buscarEventos(@Query("nome") String nome, @Query("categoria") String categoria);
+
+
+    @GET("/categorias")
+    Call<List<CategoriaEvento>> getCategorias();
 
 }

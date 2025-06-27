@@ -1,46 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/edtBuscarEvento"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@android:color/white">
+        android:layout_height="wrap_content"
+        android:hint="Buscar evento por nome" />
 
-        <EditText
-            android:id="@+id/edtBusca"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:drawableStart="@drawable/ic_search"
-            android:drawablePadding="8dp"
-            android:hint="Buscar eventos..."
-            android:backgroundTint="@color/azul_secundario"
-            android:textColorHint="#A4BDF1"
-            android:textColor="@color/black"
-            android:fontFamily="@font/open_sans"
-            android:padding="12dp"
-            android:layout_marginTop="50dp"/>
+    <Spinner
+        android:id="@+id/spinnerCategorias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvResultados"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerEventos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="8dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:background="@color/azul_primario"
         app:itemIconTint="@color/nav_item_color"
         app:itemTextColor="@color/nav_item_color"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />
-</FrameLayout>
+
+</LinearLayout>

@@ -68,7 +68,7 @@ public class DetalhesEventoActivity extends AppCompatActivity {
                     Log.e("GlideAuth", "Token não encontrado para carregar imagem.");
                     imgEvento.setImageResource(android.R.drawable.ic_dialog_alert);
                 } else {
-                    String imageUrl = "http://172.22.20.22:8080/eventos/imagens/" + evento.getImagemNome();
+                    String imageUrl = "http://192.168.0.166:8080/eventos/imagens/" + evento.getImagemNome();
 
                     GlideUrl glideUrl = new GlideUrl(imageUrl, new LazyHeaders.Builder()
                             .addHeader("Authorization", "Bearer " + token)
