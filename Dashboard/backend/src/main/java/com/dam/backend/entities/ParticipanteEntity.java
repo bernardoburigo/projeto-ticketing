@@ -39,7 +39,7 @@ public class ParticipanteEntity extends Auditoria {
     @Column
     private String documento;
 
-    @Column(name = "ingresso_qrcode", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "ingresso_qrcode", nullable = false, unique = true, columnDefinition = "TEXT")
     private String ingressoQrCode;
 
     @Column(nullable = false)

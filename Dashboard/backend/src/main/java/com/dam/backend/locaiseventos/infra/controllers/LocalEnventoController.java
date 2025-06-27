@@ -63,13 +63,7 @@ public class LocalEnventoController {
     @WithPermissoes({Permissoes.DEFAULT})
     @GetMapping
     public ResponseEntity<Page<LocaisEventoResponseDTO>> paginarLocalEvento(@ModelAttribute PaginarDTO dto) {
-        PaginarDTO params = PaginarDTO.valueDefaults(
-                dto.page(),
-                dto.size(),
-                dto.orderby(),
-                dto.direction(),
-                dto.search()
-        );
+        PaginarDTO params = PaginarDTO.valueDefaults(dto);
 
         return ResponseEntity.ok(paginarLocalEventoUseCase.paginar(params));
     }

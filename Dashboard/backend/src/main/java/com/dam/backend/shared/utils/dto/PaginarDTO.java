@@ -9,18 +9,14 @@ public record PaginarDTO(
 ) {
 
     public static PaginarDTO valueDefaults(
-            Integer page,
-            Integer size,
-            String orderby,
-            String direction,
-            String search
+            PaginarDTO dto
     ) {
         return new PaginarDTO(
-                page != null ? page : 0,
-                size != null ? size : 10,
-                orderby != null ? orderby : "id",
-                direction != null ? direction : "DESC",
-                search != null ? search : ""
+                dto.page != null ? dto.page : 0,
+                dto.size != null ? dto.size : 10,
+                dto.orderby != null ? dto.orderby : "id",
+                dto.direction != null ? dto.direction : "DESC",
+                dto.search != null ? dto.search : ""
         );
     }
 }

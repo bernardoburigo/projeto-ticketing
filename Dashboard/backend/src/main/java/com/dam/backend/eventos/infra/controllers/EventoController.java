@@ -56,13 +56,7 @@ public class EventoController {
     @WithPermissoes({Permissoes.DEFAULT})
     @GetMapping
     public ResponseEntity<Page<EventoResponseDTO>> paginarEvento(@ModelAttribute PaginarDTO dto) {
-        PaginarDTO params = PaginarDTO.valueDefaults(
-                dto.page(),
-                dto.size(),
-                dto.orderby(),
-                dto.direction(),
-                dto.search()
-        );
+        PaginarDTO params = PaginarDTO.valueDefaults(dto);
 
         return ResponseEntity.ok(eventoService.paginar(params));
     }

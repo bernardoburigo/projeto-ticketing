@@ -23,4 +23,7 @@ public interface LoteIngressoRepository extends JpaRepository<LoteIngressoEntity
             "  li.tipoIngresso.nome ILIKE CONCAT('%', :search, '%') " +
             ") ")
     Page<LoteIngressoEntity> findAllByAtivo(@Param("search") String search, PageRequest pageRequest);
+
+    @Query("SELECT le FROM LoteIngressoEntity le WHERE le.evento.id = :idEvento")
+    List<LoteIngressoEntity> findByEvento(@Param("idEvento") Integer idEvento);
 }

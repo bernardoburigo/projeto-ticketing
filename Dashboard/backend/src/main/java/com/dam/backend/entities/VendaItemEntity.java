@@ -31,7 +31,7 @@ public class VendaItemEntity extends Auditoria {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "i_lote_ingresso", nullable = false)
-    private LoteIngressoEntity loteIngressoEntity;
+    private LoteIngressoEntity loteIngresso;
 
     @Column(nullable = false)
     private Integer quantidade;
