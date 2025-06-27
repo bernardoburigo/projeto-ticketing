@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     android:background="@android:color/white">
 
     <TextView
@@ -11,18 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Meus Ingressos"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="#1A3B9F"
-        android:fontFamily="@font/open_sans"
         android:gravity="center"
         android:paddingBottom="16dp"
+        android:textColor="@color/azul_primario"
+        android:fontFamily="@font/open_sans"
         android:layout_marginTop="50dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewIngressos"
+        android:id="@+id/recyclerIngressos"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 
 </LinearLayout>

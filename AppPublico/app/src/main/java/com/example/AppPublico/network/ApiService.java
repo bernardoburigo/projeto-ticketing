@@ -1,7 +1,9 @@
 package com.example.AppPublico.network;
 
 import com.example.AppPublico.models.MensagemSistema;
+import com.example.AppPublico.models.PageResponse;
 import com.example.AppPublico.models.PaginarOrBuscarLoteIngressoResponseDTO;
+import com.example.AppPublico.models.QrCodeResponseDTO;
 import com.example.AppPublico.models.UsuarioRequest;
 import com.example.AppPublico.models.VendaRequest;
 
@@ -10,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -26,5 +29,12 @@ public interface ApiService {
     Call<MensagemSistema> comprarIngresso(@Path("idEvento") int idEvento,
                                           @Path("idUsuario") int idUsuario,
                                           @Body VendaRequest dto);
+
+    @GET("ingressos/usuario/{idUsuario}")
+    Call<PageResponse<QrCodeResponseDTO>> getIngressosPorUsuario(
+            @Path("idUsuario") int idUsuario,
+            @Query("pagina") int pagina,
+            @Query("quantidade") int quantidade
+    );
 
 }

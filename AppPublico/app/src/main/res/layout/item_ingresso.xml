@@ -11,30 +11,27 @@
         android:orientation="vertical"
         android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/azul_secundario">
 
         <TextView
-            android:id="@+id/tvNomeParticipante"
+            android:id="@+id/tvItemIngressoNomeEvento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nome"
             android:textStyle="bold"
+            android:textColor="@color/black"
+            android:fontFamily="@font/open_sans"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tvDocumentoParticipante"
+            android:id="@+id/tvItemIngressoValor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Documento"
+            android:text="Valor do ingresso "
+            android:textColor="@color/black"
+            android:fontFamily="@font/open_sans"
             android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tvStatusCheckin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Check-in: Pendente"
-            android:textSize="14sp"
-            android:textColor="@color/black" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

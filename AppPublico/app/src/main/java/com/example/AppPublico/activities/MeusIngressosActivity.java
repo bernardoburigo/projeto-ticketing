@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.AppPublico.R;
 import com.example.AppPublico.adapters.IngressoAdapter;
+import com.example.AppPublico.models.PageResponse;
 import com.example.AppPublico.models.QrCodeResponseDTO;
 import com.example.AppPublico.network.ApiService;
 import com.example.AppPublico.services.RetrofitClient;
@@ -43,20 +44,20 @@ public class MeusIngressosActivity extends AppCompatActivity {
         }
 
         ApiService api = RetrofitClient.getApiService();
-        api.getIngressosPorUsuario(idUsuario, 0, 50).enqueue(new Callback<>() {
+        api.getIngressosPorUsuario(idUsuario, 0, 50).enqueue(new Callback<PageResponse<QrCodeResponseDTO>>() {
             @Override
-            public void onResponse(Call<List<QrCodeResponseDTO>> call, Response<List<QrCodeResponseDTO>> response) {
+            public void onResponse(Call<PageResponse<QrCodeResponseDTO>> call, Response<PageResponse<QrCodeResponseDTO>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    adapter = new IngressoAdapter(response.body(), MeusIngressosActivity.this);
+                    List<QrCodeResponseDTO> ingressos = response.body().getContent();
+                    adapter = new IngressoAdapter(ingressos, MeusIngressosActivity.this);
                     recyclerView.setAdapter(adapter);
                 } else {
                     Toast.makeText(MeusIngressosActivity.this, "Erro ao carregar ingressos", Toast.LENGTH_SHORT).show();
-                    Log.e("MeusIngressos", "Erro: " + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<QrCodeResponseDTO>> call, Throwable t) {
+            public void onFailure(Call<PageResponse<QrCodeResponseDTO>> call, Throwable t) {
                 Toast.makeText(MeusIngressosActivity.this, "Erro de rede: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

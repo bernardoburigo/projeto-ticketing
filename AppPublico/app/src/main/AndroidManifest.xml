@@ -23,7 +23,6 @@
         <activity android:name=".activities.LoginActivity"/>
         <activity android:name=".activities.VerificacaoIngressoActivity"/>
         <activity android:name=".activities.CompraIngressoActivity"/>
-        <activity android:name=".activities.DetalhesIngressoActivity"/>
         <activity android:name=".activities.CriarContaActivity"/>
 
 
