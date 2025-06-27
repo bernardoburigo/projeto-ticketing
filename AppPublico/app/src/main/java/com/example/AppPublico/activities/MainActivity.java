@@ -88,7 +88,9 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Evento> eventos = response.body().getContent();
                     adapter = new EventoAdapter(eventos, evento -> {
-                        Toast.makeText(MainActivity.this, "Evento: " + evento.getNome(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, DetalhesEventoActivity.class);
+                        intent.putExtra("evento", evento);
+                        startActivity(intent);
                     });
                     recyclerView.setAdapter(adapter);
                 } else {

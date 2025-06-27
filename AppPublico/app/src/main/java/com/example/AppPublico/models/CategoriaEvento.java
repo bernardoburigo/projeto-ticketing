@@ -1,6 +1,8 @@
 package com.example.AppPublico.models;
 
-public class CategoriaEvento {
+import java.io.Serializable;
+
+public class CategoriaEvento implements Serializable {
     private int id;
     private String nome;
 

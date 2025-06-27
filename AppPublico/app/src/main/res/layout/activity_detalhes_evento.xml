@@ -1,75 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="#FFFFFF">
+    android:padding="16dp"
+    android:background="@color/white">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imgEvento"
+            android:id="@+id/imgEventoDetalhe"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:contentDescription="Imagem do evento"
             android:src="@drawable/ic_launcher_background"
-            android:background="#F4F3F8"
-            android:layout_marginBottom="16dp" />
+            android:layout_marginTop="50dp"/>
 
         <TextView
-            android:id="@+id/tvTituloEvento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Título do Evento"
-            android:textSize="24sp"
+            android:id="@+id/tvNomeEventoDetalhe"
             android:textStyle="bold"
-            android:textColor="#1A3B9F"
-            android:fontFamily="@font/open_sans"
-            android:layout_marginBottom="12dp" />
-
-        <TextView
-            android:id="@+id/tvLocalEvento"
+            android:textSize="24sp"
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Local"
-            android:textSize="16sp"
-            android:textColor="#3A3A3A"
             android:fontFamily="@font/open_sans"
-            android:layout_marginBottom="4dp" />
+            android:textColor="@color/azul_primario"/>
 
         <TextView
-            android:id="@+id/tvDataHoraEvento"
+            android:id="@+id/tvDescricaoEvento"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data e hora"
-            android:textSize="16sp"
-            android:textColor="#3A3A3A"
             android:fontFamily="@font/open_sans"
-            android:layout_marginBottom="4dp" />
+            android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/tvArtistasEvento"
+            android:id="@+id/tvDataInicioEvento"
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Artistas/Palestrantes"
-            android:textSize="16sp"
-            android:textColor="#3A3A3A"
             android:fontFamily="@font/open_sans"
-            android:layout_marginBottom="20dp" />
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvDataFinalEvento"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvCategoriaEvento"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/tvLocalEventoDetalhe"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans"
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/btnComprarIngresso"
+            android:text="Comprar Ingresso"
+            android:layout_marginTop="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Comprar Ingresso"
-            android:backgroundTint="#1A3B9F"
+            android:backgroundTint="@color/azul_primario"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:fontFamily="@font/open_sans"
-            android:padding="14dp" />
+            android:fontFamily="@font/open_sans"/>
+
     </LinearLayout>
 </ScrollView>
